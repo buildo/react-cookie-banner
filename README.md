@@ -25,7 +25,11 @@ npm install --save react-cookie-banner
 ```
   message:         React.PropTypes.string.isRequired,
   onAccept:        React.PropTypes.func,
-  learnMore:       React.PropTypes.string, // this should be the URL!
+  link:            React.PropTypes.shape({
+                     msg: React.PropTypes.string,
+                     url: React.PropTypes.string.isRequired,
+                   }),
+  cookie:          React.PropTypes.string, // defaults to 'accepts-cookie'
   dismissOnScroll: React.PropTypes.bool, // true by default!
   closeIcon:       React.PropTypes.string, // this should be the className of the icon. if undefined use button
   disableStyle:    React.PropTypes.bool,
@@ -46,7 +50,7 @@ In this case you can style it using css classes. The banner is structured as fol
 <div className={this.props.className + ' react-cookie-banner'}
   <span className='cookie-message'>
     {this.props.message}
-    <a className='learn-more'>
+    <a className='cookie-link'>
       Learn more
     </a>
   </span>
