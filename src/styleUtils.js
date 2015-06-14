@@ -10,7 +10,7 @@ const styles = {
     cursor: 'pointer'
   },
 
-  learnMore: {
+  link: {
     color: '#F0F0F0',
     textDecoration: 'underline',
     marginLeft: '10px'

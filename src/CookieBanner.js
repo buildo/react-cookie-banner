@@ -8,8 +8,11 @@ const CookieBanner = React.createClass({
     message:         React.PropTypes.string.isRequired,
     // shortMessage:    React.PropTypes.string,
     onAccept:        React.PropTypes.func,
-    // onDeny:          React.PropTypes.func,
-    learnMore:       React.PropTypes.string,
+    link:            React.PropTypes.shape({
+                       msg: React.PropTypes.string,
+                       url: React.PropTypes.string.isRequired,
+                     }),
+    cookie:          React.PropTypes.string,
     dismissOnScroll: React.PropTypes.bool,
     closeIcon:       React.PropTypes.string,
     disableStyle:    React.PropTypes.bool
@@ -63,9 +66,9 @@ const CookieBanner = React.createClass({
     return <div className='button-close' onClick={this.onAccept} style={this.getStyle('button')}>Got it</div>;
   },
 
-  getLearnMore() {
-    if (this.props.learnMore) {
-      return <a href={this.props.learnMore} style={this.getStyle('learnMore')}>Learn more</a>;
+  getLink() {
+    if (this.props.link) {
+      return <a href={this.props.link.url} style={this.getStyle('link')}>{this.props.link.msg || 'Learn more'}</a>;
     }
   },
 
@@ -74,7 +77,7 @@ const CookieBanner = React.createClass({
       <div className={this.props.className + ' react-cookie-banner'} style={this.getStyle('banner')}>
         <span className='cookie-message' style={this.getStyle('message')}>
           {this.props.message}
-          {this.getLearnMore()}
+          {this.getLink()}
         </span>
         {this.getCloseButton()}
       </div>
