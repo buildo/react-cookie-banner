@@ -22,13 +22,14 @@ const CookieBanner = React.createClass({
     return {
       className: '',
       onAccept: () => {},
-      dismissOnScroll: true
+      dismissOnScroll: true,
+      cookie: 'accepts-cookies'
     };
   },
 
   getInitialState() {
     return {
-      acceptsCookies: cookie('accepts-cookies')
+      acceptsCookies: cookie(this.props.cookie)
     };
   },
 
@@ -44,10 +45,9 @@ const CookieBanner = React.createClass({
   },
 
   onAccept() {
-    console.log('accepted');
-    cookie('accepts-cookies', true);
-    this.setState({acceptsCookies: cookie('accepts-cookies')});
-    this.props.onAccept({'accepts-cookies': true});
+    cookie(this.props.cookie, true);
+    this.setState({acceptsCookies: cookie(this.props.cookie)});
+    this.props.onAccept({cookie: this.props.cookie});
     if (this.props.dismissOnScroll) {
       window.onscroll = null;
     }
