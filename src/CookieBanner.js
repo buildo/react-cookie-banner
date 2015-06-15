@@ -68,7 +68,14 @@ const CookieBanner = React.createClass({
 
   getLink() {
     if (this.props.link) {
-      return <a href={this.props.link.url} style={this.getStyle('link')}>{this.props.link.msg || 'Learn more'}</a>;
+      return (
+        <a
+          href={this.props.link.url}
+          className='cookie-link'
+          style={this.getStyle('link')}>
+            {this.props.link.msg || 'Learn more'}
+        </a>
+      );
     }
   },
 
