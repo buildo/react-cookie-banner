@@ -23,7 +23,7 @@ npm install --save react-cookie-banner
 
 ###API
 ```
-  message:         React.PropTypes.string.isRequired,
+  message:         React.PropTypes.string,
   onAccept:        React.PropTypes.func,
   link:            React.PropTypes.shape({
                      msg: React.PropTypes.string,
@@ -33,7 +33,8 @@ npm install --save react-cookie-banner
   dismissOnScroll: React.PropTypes.bool, // true by default!
   closeIcon:       React.PropTypes.string, // this should be the className of the icon. if undefined use button
   disableStyle:    React.PropTypes.bool,
-  className:       React.PropTypes.string
+  className:       React.PropTypes.string,
+  children:        React.PropTypes.element // rendered in replacement without any <div> wrapper
 ```
 **Coming next**:
 ```
@@ -58,4 +59,10 @@ In this case you can style it using css classes. The banner is structured as fol
     Got it
   </div>
 </div>
+```
+You can also pass your own CustomCookieBanner as child component which will be rendered in replacement:
+```
+<CookieBanner>
+  <CustomCookieBanner {...myCustomProps} /> // rendered directly without any <div> wrapper
+</CookieBanner>
 ```
