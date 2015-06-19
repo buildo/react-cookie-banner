@@ -3,10 +3,9 @@ import {cookie} from 'browser-cookie-lite';
 import styleUtils from './styleUtils';
 
 const CookieBanner = React.createClass({
-
+  /*eslint-disable */
   propTypes: {
-    message:         React.PropTypes.string.isRequired,
-    // shortMessage:    React.PropTypes.string,
+    message:         React.PropTypes.string,
     onAccept:        React.PropTypes.func,
     link:            React.PropTypes.shape({
                        msg: React.PropTypes.string,
@@ -15,8 +14,10 @@ const CookieBanner = React.createClass({
     cookie:          React.PropTypes.string,
     dismissOnScroll: React.PropTypes.bool,
     closeIcon:       React.PropTypes.string,
-    disableStyle:    React.PropTypes.bool
+    disableStyle:    React.PropTypes.bool,
+    children:        React.PropTypes.element
   },
+  /*eslint-enable */
 
   getDefaultProps() {
     return {
@@ -80,6 +81,9 @@ const CookieBanner = React.createClass({
   },
 
   getBanner() {
+    if (this.props.children) {
+      return this.props.children;
+    }
     return (
       <div className={this.props.className + ' react-cookie-banner'} style={this.getStyle('banner')}>
         <span className='cookie-message' style={this.getStyle('message')}>

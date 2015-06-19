@@ -55,4 +55,28 @@ describe('CookieBanner', function() {
     expect(message.innerHTML).toBe('cookie message', 'wrong message displayed');
   });
 
+  it('should be replaced with custom child component', function() {
+
+    const MyComponent = React.createClass({
+      render() {
+        return <div className='my-component'/>;
+      }
+    });
+
+    const component =
+      <div>
+        <CookieBanner>
+          <MyComponent />
+        </CookieBanner>
+      </div>;
+
+    const cookieWrapper = TestUtils.renderIntoDocument(component);
+
+    const banner = TestUtils.scryRenderedDOMComponentsWithClass(cookieWrapper, 'react-cookie-banner');
+    expect(banner.length).toBe(0, 'cookie banner is being displayed');
+
+    const _myComponent = TestUtils.scryRenderedDOMComponentsWithClass(cookieWrapper, 'my-component');
+    expect(_myComponent.length).toBe(1, 'cookie banner is not displaing custom child component');
+  });
+
 });
