@@ -1,4 +1,7 @@
 node_modules
 coverage
 npm-debug.log
-lib
+.git
+test
+karma*
+.eslintrc
