@@ -4,15 +4,21 @@ React Cookie banner which can be dismissed with just a scroll. Because fuck EU t
 
 If you *really* want to annoy your users you can disable this feature (highly discouraged!).
 
-```
-var CookieBanner = require('react-cookie-banner');
+```jsx
+import CookieBanner from 'react-cookie-banner';
 
 React.renderComponent(
   <div>
-    <CookieBanner message='Yes, we use cookies. If you don't like it change website, we won't miss you!' />
+    <CookieBanner
+      message='Yes, we use cookies. If you don't like it change website, we won't miss you!'
+      onAccept={() => {}}
+      cookie='user-has-accepted-cookies'/>
   </div>,
   document.body);
 ```
+[Live Demo](https://rawgit.com/buildo/react-cookie-banner/master/examples/index.html)
+
+[More Examples](https://github.com/buildo/react-cookie-banner/tree/master/examples)
 
 ###Install
 ```
@@ -22,32 +28,33 @@ npm install --save react-cookie-banner
 
 
 ###API
-```
-  message:         React.PropTypes.string,
-  onAccept:        React.PropTypes.func,
-  link:            React.PropTypes.shape({
-                     msg: React.PropTypes.string,
-                     url: React.PropTypes.string.isRequired,
-                   }),
-  cookie:          React.PropTypes.string, // defaults to 'accepts-cookie'
-  dismissOnScroll: React.PropTypes.bool, // true by default!
-  closeIcon:       React.PropTypes.string, // this should be the className of the icon. if undefined use button
-  disableStyle:    React.PropTypes.bool,
-  className:       React.PropTypes.string,
-  children:        React.PropTypes.element // rendered in replacement without any <div> wrapper
+```jsx
+message:         React.PropTypes.string,
+onAccept:        React.PropTypes.func,
+link:            React.PropTypes.shape({
+                   msg: React.PropTypes.string, // defaults to 'Learn more'
+                   url: React.PropTypes.string.isRequired,
+                 }),
+buttonMessage:   React.PropTypes.string,
+cookie:          React.PropTypes.string, // defaults to 'accepts-cookie'
+dismissOnScroll: React.PropTypes.bool, // true by default!
+closeIcon:       React.PropTypes.string, // this should be the className of the icon. if undefined use button
+disableStyle:    React.PropTypes.bool,
+className:       React.PropTypes.string,
+children:        React.PropTypes.element // rendered in replacement without any <div> wrapper
 ```
 **Coming next**:
-```
-  shortMessage: React.PropTypes.string, // to be used with smaller screens
+```jsx
+shortMessage: React.PropTypes.string, // to be used with smaller screens
 ```
 
 ###Style
 ReactCookieBanner by default uses its simple inline style. However you can easily disable it by passing
-```
+```jsx
 <CookieBanner disableStyle={true} />
 ```
 In this case you can style it using css classes. The banner is structured as follows:
-```
+```html
 <div className={this.props.className + ' react-cookie-banner'}
   <span className='cookie-message'>
     {this.props.message}
@@ -61,7 +68,7 @@ In this case you can style it using css classes. The banner is structured as fol
 </div>
 ```
 You can also pass your own CustomCookieBanner as child component which will be rendered in replacement:
-```
+```jsx
 <CookieBanner>
   <CustomCookieBanner {...myCustomProps} /> // rendered directly without any <div> wrapper
 </CookieBanner>
