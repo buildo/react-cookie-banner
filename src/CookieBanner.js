@@ -11,6 +11,7 @@ const CookieBanner = React.createClass({
                        msg: React.PropTypes.string,
                        url: React.PropTypes.string.isRequired,
                      }),
+    buttonMessage:   React.PropTypes.string,
     cookie:          React.PropTypes.string,
     dismissOnScroll: React.PropTypes.bool,
     closeIcon:       React.PropTypes.string,
@@ -21,21 +22,22 @@ const CookieBanner = React.createClass({
 
   getDefaultProps() {
     return {
-      className: '',
       onAccept: () => {},
       dismissOnScroll: true,
-      cookie: 'accepts-cookies'
+      cookie: 'accepts-cookies',
+      buttonMessage: 'Got it',
+      className: ''
     };
   },
 
   getInitialState() {
     return {
-      acceptsCookies: cookie(this.props.cookie)
+      listeningScroll: this.props.dismissOnScroll
     };
   },
 
   componentDidMount() {
-    if (!this.state.acceptsCookies && this.props.dismissOnScroll) {
+    if (!this.acceptsCookies() && this.props.dismissOnScroll) {
       window.onscroll = this.onScroll;
     }
   },
@@ -47,10 +49,10 @@ const CookieBanner = React.createClass({
 
   onAccept() {
     cookie(this.props.cookie, true);
-    this.setState({acceptsCookies: cookie(this.props.cookie)});
     this.props.onAccept({cookie: this.props.cookie});
     if (this.props.dismissOnScroll) {
       window.onscroll = null;
+      this.setState({listeningScroll: false});
     }
   },
 
@@ -64,7 +66,11 @@ const CookieBanner = React.createClass({
     if (this.props.closeIcon) {
       return <i className={this.props.closeIcon} onClick={this.onAccept} style={this.getStyle('icon')}/>;
     }
-    return <div className='button-close' onClick={this.onAccept} style={this.getStyle('button')}>Got it</div>;
+    return (
+      <div className='button-close' onClick={this.onAccept} style={this.getStyle('button')}>
+        {this.props.buttonMessage}
+      </div>
+    );
   },
 
   getLink() {
@@ -95,9 +101,20 @@ const CookieBanner = React.createClass({
     );
   },
 
+  acceptsCookies() {
+    return cookie(this.props.cookie) ? true : false;
+  },
+
   render() {
-    return this.state.acceptsCookies ? null : this.getBanner();
-  }
+    return this.acceptsCookies() ? null : this.getBanner();
+  },
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.acceptsCookies() && nextProps.dismissOnScroll && !this.state.listeningScroll) {
+      window.onscroll = this.onScroll;
+      this.setState({listeningScroll: true});
+    }
+  },
 
 });
 
