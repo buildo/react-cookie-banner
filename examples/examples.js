@@ -1,6 +1,6 @@
 import React from 'react';
-import CookieBanner from '../src/CookieBanner';
-import {cookie} from 'browser-cookie-lite';
+import CookieBanner from '../src';
+import {cookie} from '../src';
 
 cookie('accepts-cookies', '');
 
