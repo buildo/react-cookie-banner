@@ -1,6 +1,6 @@
 # React Cookie Banner
 
-React Cookie banner which can be dismissed with just a scroll. Because fuck EU that's why.
+React Cookie banner which can be dismissed with just a scroll. Because fuck The Cookie Law that's why.
 
 If you *really* want to annoy your users you can disable this feature (highly discouraged!).
 
@@ -24,8 +24,6 @@ React.renderComponent(
 ```
 npm install --save react-cookie-banner
 ```
-
-
 
 ###API
 ```jsx
@@ -73,3 +71,21 @@ You can also pass your own CustomCookieBanner as child component which will be r
   <CustomCookieBanner {...myCustomProps} /> // rendered directly without any <div> wrapper
 </CookieBanner>
 ```
+
+###Cookie manipulation
+ReactCookieBanner uses and exports the library **```browser-cookie-lite```**
+
+You can import and use it as follows:
+```es6
+import {cookie} from 'react-cookie-banner';
+
+// simple set
+cookie("test", "a")
+// complex set - cookie(name, value, ttl, path, domain, secure)
+cookie("test", "a", 60*60*24, "/api", "*.example.com", true)
+// get
+cookie("test")
+// destroy
+cookie("test", "", -1)
+```
+Please refer to [browser-cookie-lite](https://github.com/litejs/browser-cookie-lite) repo for more documentation.
