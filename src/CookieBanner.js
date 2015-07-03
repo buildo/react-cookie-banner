@@ -5,18 +5,19 @@ import styleUtils from './styleUtils';
 const CookieBanner = React.createClass({
   /*eslint-disable */
   propTypes: {
-    message:         React.PropTypes.string,
-    onAccept:        React.PropTypes.func,
-    link:            React.PropTypes.shape({
-                       msg: React.PropTypes.string,
-                       url: React.PropTypes.string.isRequired,
-                     }),
-    buttonMessage:   React.PropTypes.string,
-    cookie:          React.PropTypes.string,
-    dismissOnScroll: React.PropTypes.bool,
-    closeIcon:       React.PropTypes.string,
-    disableStyle:    React.PropTypes.bool,
-    children:        React.PropTypes.element
+    message:                  React.PropTypes.string,
+    onAccept:                 React.PropTypes.func,
+    link:                     React.PropTypes.shape({
+                                msg: React.PropTypes.string,
+                                url: React.PropTypes.string.isRequired,
+                              }),
+    buttonMessage:            React.PropTypes.string,
+    cookie:                   React.PropTypes.string,
+    dismissOnScroll:          React.PropTypes.bool,
+    dismissOnScrollThreshold: React.PropTypes.number,
+    closeIcon:                React.PropTypes.string,
+    disableStyle:             React.PropTypes.bool,
+    children:                 React.PropTypes.element
   },
   /*eslint-enable */
 
@@ -26,7 +27,8 @@ const CookieBanner = React.createClass({
       dismissOnScroll: true,
       cookie: 'accepts-cookies',
       buttonMessage: 'Got it',
-      className: ''
+      className: '',
+      dismissOnScrollThreshold: 0
     };
   },
 
@@ -44,7 +46,8 @@ const CookieBanner = React.createClass({
 
   onScroll() {
     // tacit agreement buahaha! (evil laugh)
-    this.onAccept();
+    if (window.pageYOffset > this.props.dismissOnScrollThreshold)
+      this.onAccept();
   },
 
   onAccept() {

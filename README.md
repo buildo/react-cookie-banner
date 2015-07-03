@@ -27,19 +27,20 @@ npm install --save react-cookie-banner
 
 ###API
 ```jsx
-message:         React.PropTypes.string,
-onAccept:        React.PropTypes.func,
-link:            React.PropTypes.shape({
-                   msg: React.PropTypes.string, // defaults to 'Learn more'
-                   url: React.PropTypes.string.isRequired,
-                 }),
-buttonMessage:   React.PropTypes.string,
-cookie:          React.PropTypes.string, // defaults to 'accepts-cookie'
-dismissOnScroll: React.PropTypes.bool, // true by default!
-closeIcon:       React.PropTypes.string, // this should be the className of the icon. if undefined use button
-disableStyle:    React.PropTypes.bool,
-className:       React.PropTypes.string,
-children:        React.PropTypes.element // rendered in replacement without any <div> wrapper
+message:                  React.PropTypes.string,
+onAccept:                 React.PropTypes.func,
+link:                     React.PropTypes.shape({
+                            msg: React.PropTypes.string, // defaults to 'Learn more'
+                            url: React.PropTypes.string.isRequired,
+                          }),
+buttonMessage:            React.PropTypes.string,
+cookie:                   React.PropTypes.string, // defaults to 'accepts-cookie'
+dismissOnScroll:          React.PropTypes.bool, // true by default!
+dismissOnScrollThreshold: React.PropTypes.number, // defaults to 0
+closeIcon:                React.PropTypes.string, // this should be the className of the icon. if undefined use button
+disableStyle:             React.PropTypes.bool,
+className:                React.PropTypes.string,
+children:                 React.PropTypes.element // rendered in replacement without any <div> wrapper
 ```
 **Coming next**:
 ```jsx
