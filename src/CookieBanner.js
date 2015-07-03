@@ -14,7 +14,7 @@ const CookieBanner = React.createClass({
     buttonMessage:            React.PropTypes.string,
     cookie:                   React.PropTypes.string,
     dismissOnScroll:          React.PropTypes.bool,
-    dismissOnScrollThreshold: React.PropTypes.bool,
+    dismissOnScrollThreshold: React.PropTypes.number,
     closeIcon:                React.PropTypes.string,
     disableStyle:             React.PropTypes.bool,
     children:                 React.PropTypes.element
