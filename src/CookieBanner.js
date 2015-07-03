@@ -46,8 +46,9 @@ const CookieBanner = React.createClass({
 
   onScroll() {
     // tacit agreement buahaha! (evil laugh)
-    if (window.pageYOffset > this.props.dismissOnScrollThreshold)
+    if (window.pageYOffset > this.props.dismissOnScrollThreshold) {
       this.onAccept();
+    }
   },
 
   onAccept() {
