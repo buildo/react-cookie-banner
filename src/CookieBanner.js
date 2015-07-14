@@ -106,7 +106,7 @@ const CookieBanner = React.createClass({
   },
 
   acceptsCookies() {
-    return cookie(this.props.cookie) ? true : false;
+    return (typeof window !== 'undefined') && cookie(this.props.cookie);
   },
 
   render() {
