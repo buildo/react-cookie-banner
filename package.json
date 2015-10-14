@@ -35,7 +35,8 @@
   "dependencies": {
     "browser-cookie-lite": "^1.0.4",
     "classnames": "^2.1.5",
-    "lodash": "^3.10.1"
+    "lodash.assign": "^3.2.0",
+    "lodash.omit": "^3.1.0"
   },
   "devDependencies": {
     "babel": "^5.4.7",

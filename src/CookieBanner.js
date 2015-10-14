@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
-import omit from 'lodash/object/omit';
-import assign from 'lodash/object/assign';
+import omit from 'lodash.omit';
+import assign from 'lodash.assign';
 import { cookie as cookieLite } from 'browser-cookie-lite';
 import styleUtils from './styleUtils';
 
