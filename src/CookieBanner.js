@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import omit from 'lodash/object/omit';
 import { cookie as cookieLite } from 'browser-cookie-lite';
 import styleUtils from './styleUtils';
 
