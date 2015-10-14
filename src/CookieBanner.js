@@ -17,6 +17,7 @@ const CookieBanner = React.createClass({
     dismissOnScrollThreshold: React.PropTypes.number,
     closeIcon:                React.PropTypes.string,
     disableStyle:             React.PropTypes.bool,
+    styles:                   React.PropTypes.object,
     children:                 React.PropTypes.element
   },
   /*eslint-enable */
@@ -62,7 +63,12 @@ const CookieBanner = React.createClass({
 
   getStyle(style) {
     if (!this.props.disableStyle) {
-      return styleUtils.getStyle(style);
+      let styles = styleUtils.getStyle(style);
+      // apply custom styles if available
+      if (this.props.styles && this.props.styles[style]) {
+        Object.assign(styles, this.props.styles[style]);
+      }
+      return styles;
     }
   },
 

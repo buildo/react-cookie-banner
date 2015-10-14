@@ -39,6 +39,7 @@ dismissOnScroll:          React.PropTypes.bool, // true by default!
 dismissOnScrollThreshold: React.PropTypes.number, // defaults to 0
 closeIcon:                React.PropTypes.string, // this should be the className of the icon. if undefined use button
 disableStyle:             React.PropTypes.bool,
+styles:                   React.PropTypes.object, // override styles
 className:                React.PropTypes.string,
 children:                 React.PropTypes.element // rendered in replacement without any <div> wrapper
 ```
@@ -72,6 +73,12 @@ You can also pass your own CustomCookieBanner as child component which will be r
   <CustomCookieBanner {...myCustomProps} /> // rendered directly without any <div> wrapper
 </CookieBanner>
 ```
+Or you override the predefined inline-styles. This examples puts the message font back to normal weight and makes the banner slightly transparent:
+```jsx
+<CookieBanner styles={{banner: {backgroundColor: 'rgba(60, 60, 60, 0.8)'}, 
+  message: {fontWeight: 400}}} message="..." />
+```
+See `src/styleUtils.js` for which style objects are availble to be overridden.
 
 ###Cookie manipulation
 ReactCookieBanner uses and exports the library **```browser-cookie-lite```**
