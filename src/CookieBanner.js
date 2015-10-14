@@ -87,48 +87,50 @@ export default React.createClass({
   },
 
   getStyle(style) {
-    if (!this.props.disableStyle) {
-      let styles = styleUtils.getStyle(style);
+    const { disableStyle, styles } = this.props;
+    if (!disableStyle) {
       // apply custom styles if available
-      if (this.props.styles && this.props.styles[style]) {
-        Object.assign(styles, this.props.styles[style]);
-      }
-      return styles;
+      return styles[style] || styleUtils.getStyle(style);
     }
   },
 
   getCloseButton() {
-    if (this.props.closeIcon) {
-      return <i className={this.props.closeIcon} onClick={this.onAccept} style={this.getStyle('icon')}/>;
+    const { closeIcon, buttonMessage } = this.props;
+    if (closeIcon) {
+      return <i className={closeIcon} onClick={this.onAccept} style={this.getStyle('icon')}/>;
     }
     return (
       <div className='button-close' onClick={this.onAccept} style={this.getStyle('button')}>
-        {this.props.buttonMessage}
+        {buttonMessage}
       </div>
     );
   },
 
   getLink() {
-    if (this.props.link) {
+    const { link } = this.props;
+    if (link) {
       return (
         <a
-          href={this.props.link.url}
+          href={link.url}
           className='cookie-link'
           style={this.getStyle('link')}>
-            {this.props.link.msg || 'Learn more'}
+            {link.msg || 'Learn more'}
         </a>
       );
     }
   },
 
   getBanner() {
-    if (this.props.children) {
-      return this.props.children;
+    const { children, className, message } = this.props;
+    if (children) {
+      return children;
     }
+
+    const props = omit(this.props, Object.keys(propTypes));
     return (
       <div {...props} className={cx('react-cookie-banner', className)} style={this.getStyle('banner')}>
         <span className='cookie-message' style={this.getStyle('message')}>
-          {this.props.message}
+          {message}
           {this.getLink()}
         </span>
         {this.getCloseButton()}
@@ -137,7 +139,7 @@ export default React.createClass({
   },
 
   acceptsCookies() {
-    return (typeof window !== 'undefined') && cookie(this.props.cookie);
+    return (typeof window !== 'undefined') && cookieLite(this.props.cookie);
   },
 
   render() {
