@@ -33,20 +33,42 @@ export default React.createClass({
       dismissOnScroll: true,
       cookie: 'accepts-cookies',
       buttonMessage: 'Got it',
-      className: '',
-      dismissOnScrollThreshold: 0
+      dismissOnScrollThreshold: 0,
+      styles: {}
     };
   },
 
   getInitialState() {
     return {
-      listeningScroll: this.props.dismissOnScroll
+      listeningScroll: false
     };
   },
 
   componentDidMount() {
-    if (!this.acceptsCookies() && this.props.dismissOnScroll) {
-      window.onscroll = this.onScroll;
+    this.addOnScrollListener();
+  },
+
+  addOnScrollListener() {
+    if (!this.acceptsCookies() && this.props.dismissOnScroll && !this.state.listeningScroll) {
+      if (window.attachEvent) {
+        //Internet Explorer
+        window.attachEvent('onmousewheel', this.onScroll);
+      } else if(window.addEventListener) {
+        window.addEventListener('mousewheel', this.onScroll, false);
+      }
+      this.setState({ listeningScroll: true });
+    }
+  },
+
+  removeOnScrollListener() {
+    if (this.state.listeningScroll) {
+      if (window.detachEvent) {
+        //Internet Explorer
+        window.detachEvent('onmousewheel', this.onScroll);
+      } else if(window.removeEventListener) {
+        window.removeEventListener('mousewheel', this.onScroll, false);
+      }
+      this.setState({ listeningScroll: false });
     }
   },
 
@@ -58,12 +80,10 @@ export default React.createClass({
   },
 
   onAccept() {
-    cookie(this.props.cookie, true);
-    this.props.onAccept({cookie: this.props.cookie});
-    if (this.props.dismissOnScroll) {
-      window.onscroll = null;
-      this.setState({listeningScroll: false});
-    }
+    const { cookie, onAccept } = this.props;
+    cookieLite(cookie, true);
+    onAccept({ cookie });
+    this.removeOnScrollListener();
   },
 
   getStyle(style) {
@@ -125,12 +145,11 @@ export default React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (!this.acceptsCookies() && nextProps.dismissOnScroll && !this.state.listeningScroll) {
-      window.onscroll = this.onScroll;
-      this.setState({listeningScroll: true});
-    }
+    this.addOnScrollListener();
   },
 
-});
+  componentWillUnmount() {
+    this.removeOnScrollListener();
+  }
 
-export default CookieBanner;
+});
