@@ -49,8 +49,9 @@ export default React.createClass({
     this.addOnScrollListener();
   },
 
-  addOnScrollListener() {
-    if (!this.acceptsCookies() && this.props.dismissOnScroll && !this.state.listeningScroll) {
+  addOnScrollListener(props) {
+    props = props || this.props;
+    if (!this.acceptsCookies() && props.dismissOnScroll && !this.state.listeningScroll) {
       if (window.attachEvent) {
         //Internet Explorer
         window.attachEvent('onmousewheel', this.onScroll);
@@ -148,7 +149,11 @@ export default React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    this.addOnScrollListener();
+    if (nextProps.dismissOnScroll) {
+      this.addOnScrollListener(nextProps);
+    } else {
+      this.removeOnScrollListener();
+    }
   },
 
   componentWillUnmount() {
