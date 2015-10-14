@@ -3,25 +3,29 @@ import cx from 'classnames';
 import { cookie as cookieLite } from 'browser-cookie-lite';
 import styleUtils from './styleUtils';
 
-const CookieBanner = React.createClass({
-  /*eslint-disable */
-  propTypes: {
-    message:                  React.PropTypes.string,
-    onAccept:                 React.PropTypes.func,
-    link:                     React.PropTypes.shape({
-                                msg: React.PropTypes.string,
-                                url: React.PropTypes.string.isRequired,
-                              }),
-    buttonMessage:            React.PropTypes.string,
-    cookie:                   React.PropTypes.string,
-    dismissOnScroll:          React.PropTypes.bool,
-    dismissOnScrollThreshold: React.PropTypes.number,
-    closeIcon:                React.PropTypes.string,
-    disableStyle:             React.PropTypes.bool,
-    styles:                   React.PropTypes.object,
-    children:                 React.PropTypes.element
-  },
-  /*eslint-enable */
+const propTypes = {
+  message: React.PropTypes.string,
+  onAccept: React.PropTypes.func,
+  link: React.PropTypes.shape({
+    msg: React.PropTypes.string,
+    url: React.PropTypes.string.isRequired,
+  }),
+  buttonMessage: React.PropTypes.string,
+  cookie: React.PropTypes.string,
+  dismissOnScroll: React.PropTypes.bool,
+  dismissOnScrollThreshold: React.PropTypes.number,
+  closeIcon: React.PropTypes.string,
+  disableStyle: React.PropTypes.bool,
+  styles: React.PropTypes.object,
+  children: React.PropTypes.element,
+  className: React.PropTypes.string
+};
+
+export default React.createClass({
+
+  displayName: 'CookieBanner',
+
+  propTypes: propTypes,
 
   getDefaultProps() {
     return {
