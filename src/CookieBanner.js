@@ -1,6 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import omit from 'lodash/object/omit';
+import assign from 'lodash/object/assign';
 import { cookie as cookieLite } from 'browser-cookie-lite';
 import styleUtils from './styleUtils';
 
@@ -92,7 +93,7 @@ export default React.createClass({
     const { disableStyle, styles } = this.props;
     if (!disableStyle) {
       // apply custom styles if available
-      return styles[style] || styleUtils.getStyle(style);
+      return assign({}, styleUtils.getStyle(style), styles[style]);
     }
   },
 

@@ -31,6 +31,7 @@ const Example = React.createClass({
     return (
       <div style={{height: 2000, fontFamily: 'sans-serif'}}>
         <CookieBanner
+          styles={{button: {color: 'blue'}}}
           dismissOnScroll={this.state.dismissOnScroll}
           message='your own custom message'
           link={{msg: 'link to cookie policy', url: 'http://nocookielaw.com/'}}
