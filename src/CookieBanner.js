@@ -51,7 +51,7 @@ export default React.createClass({
 
   addOnScrollListener(props) {
     props = props || this.props;
-    if (!this.acceptsCookies() && props.dismissOnScroll && !this.state.listeningScroll) {
+    if (!this.state.listeningScroll && !this.hasAcceptedCookies() && props.dismissOnScroll) {
       if (window.attachEvent) {
         //Internet Explorer
         window.attachEvent('onmousewheel', this.onScroll);
@@ -140,12 +140,12 @@ export default React.createClass({
     );
   },
 
-  acceptsCookies() {
+  hasAcceptedCookies() {
     return (typeof window !== 'undefined') && cookieLite(this.props.cookie);
   },
 
   render() {
-    return this.acceptsCookies() ? null : this.getBanner();
+    return this.hasAcceptedCookies() ? null : this.getBanner();
   },
 
   componentWillReceiveProps(nextProps) {
