@@ -33,7 +33,8 @@
   },
   "homepage": "https://github.com/buildo/react-cookie-banner",
   "dependencies": {
-    "browser-cookie-lite": "^1.0.4"
+    "browser-cookie-lite": "^1.0.4",
+    "classnames": "^2.1.5"
   },
   "devDependencies": {
     "babel": "^5.4.7",

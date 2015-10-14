@@ -1,5 +1,6 @@
 import React from 'react';
-import {cookie} from 'browser-cookie-lite';
+import cx from 'classnames';
+import { cookie as cookieLite } from 'browser-cookie-lite';
 import styleUtils from './styleUtils';
 
 const CookieBanner = React.createClass({
@@ -101,7 +102,7 @@ const CookieBanner = React.createClass({
       return this.props.children;
     }
     return (
-      <div className={this.props.className + ' react-cookie-banner'} style={this.getStyle('banner')}>
+      <div {...props} className={cx('react-cookie-banner', className)} style={this.getStyle('banner')}>
         <span className='cookie-message' style={this.getStyle('message')}>
           {this.props.message}
           {this.getLink()}
