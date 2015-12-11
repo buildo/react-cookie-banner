@@ -10,7 +10,7 @@ const propTypes = {
   onAccept: React.PropTypes.func,
   link: React.PropTypes.shape({
     msg: React.PropTypes.string,
-    url: React.PropTypes.string.isRequired,
+    url: React.PropTypes.string.isRequired
   }),
   buttonMessage: React.PropTypes.string,
   cookie: React.PropTypes.string,

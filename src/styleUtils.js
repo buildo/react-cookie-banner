@@ -47,7 +47,7 @@ const styles = {
     width: '100%',
     height: '45px',
     zIndex: '10000'
-  },
+  }
 };
 
 const getStyle = (style) => styles[style];
