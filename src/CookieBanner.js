@@ -84,7 +84,7 @@ export default React.createClass({
 
   onAccept() {
     const { cookie, onAccept } = this.props;
-    cookieLite(cookie, true);
+    cookieLite(cookie, true, 60*60*24*365);
     onAccept({ cookie });
     this.removeOnScrollListener();
   },
