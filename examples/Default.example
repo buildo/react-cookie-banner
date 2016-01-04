@@ -1,0 +1,46 @@
+class Example extends React.Component {
+
+  constructor(props) {
+    super(props);
+    cookie('accepts-cookies', '');
+    this.state = {
+      dismissOnScroll: true
+    };
+  }
+
+  resetCookies = () => {
+    cookie('accepts-cookies', '');
+    this.forceUpdate();
+  }
+
+  toggleDismissOnScroll = () => {
+    this.setState({ dismissOnScroll: !this.state.dismissOnScroll });
+  }
+
+  onAccept = () => this.forceUpdate()
+
+  render() {
+    return (
+      <div>
+        {/*POSITION FIXED ONLY FOR EXAMPLE PURPOSE*/}
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 999 }}>
+          <CookieBanner
+            styles={{ button: { color: 'blue' } } }
+            dismissOnScroll={this.state.dismissOnScroll}
+            message='your own custom message'
+            link={{ msg: 'link to cookie policy', url: 'http://nocookielaw.com/' }}
+            buttonMessage='close button message'
+            onAccept={this.onAccept}
+          />
+        </div>
+        <div>
+          <p>accepts-cookies: {cookie('accepts-cookies') ? 'true' : 'false'}</p>
+          <button onClick={this.toggleDismissOnScroll}>{this.state.dismissOnScroll ? 'Disable' : 'Activate'} "dismissOnScroll"</button>
+          <button onClick={this.resetCookies}>Reset Cookies</button>
+          <h2>Try dismissing with a scroll</h2>
+        </div>
+      </div>
+    );
+  }
+
+}
