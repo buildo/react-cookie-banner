@@ -75,25 +75,10 @@ You can also pass your own CustomCookieBanner as child component which will be r
 ```
 Or you override the predefined inline-styles. This examples puts the message font back to normal weight and makes the banner slightly transparent:
 ```jsx
-<CookieBanner styles={{banner: {backgroundColor: 'rgba(60, 60, 60, 0.8)'}, 
+<CookieBanner styles={{banner: {backgroundColor: 'rgba(60, 60, 60, 0.8)'},
   message: {fontWeight: 400}}} message="..." />
 ```
 See `src/styleUtils.js` for which style objects are availble to be overridden.
 
-###Cookie manipulation
-ReactCookieBanner uses and exports the library **```browser-cookie-lite```**
-
-You can import and use it as follows:
-```es6
-import {cookie} from 'react-cookie-banner';
-
-// simple set
-cookie("test", "a")
-// complex set - cookie(name, value, ttl, path, domain, secure)
-cookie("test", "a", 60*60*24, "/api", "*.example.com", true)
-// get
-cookie("test")
-// destroy
-cookie("test", "", -1)
-```
-Please refer to [browser-cookie-lite](https://github.com/litejs/browser-cookie-lite) repo for more documentation.
+###Universal
+ReactCookieBanner uses the library [react-cookie](https://github.com/eXon/react-cookie), so it can also deal with cookies on the server side, you just have to plug your request to reactCookie (```reactCookie.plugToRequest(req, res)```) and you are good to go!

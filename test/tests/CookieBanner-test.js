@@ -1,7 +1,7 @@
 import React from 'react/addons';
 const TestUtils = React.addons.TestUtils;
 import expect from 'expect';
-import CookieBanner from '../../src/CookieBanner';
+import CookieBanner from '../../src';
 
 const resetCookies = function () {
   const cookies = document.cookie.split(";");
