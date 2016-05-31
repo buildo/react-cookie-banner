@@ -11,7 +11,7 @@ const propTypes = {
   link: React.PropTypes.shape({
     msg: React.PropTypes.string,
     url: React.PropTypes.string.isRequired,
-    target: _react2['default'].PropTypes.oneOf(['_blank', '_self', '_parent', '_top', 'framename'])
+    target: React.PropTypes.oneOf(['_blank', '_self', '_parent', '_top', 'framename'])
   }),
   buttonMessage: React.PropTypes.string,
   cookie: React.PropTypes.string,
