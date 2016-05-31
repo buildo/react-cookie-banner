@@ -116,7 +116,7 @@ export default React.createClass({
       return (
         <a
           href={link.url}
-          target: link.target,
+          target={link.target}
           className='cookie-link'
           style={this.getStyle('link')}>
             {link.msg || 'Learn more'}
