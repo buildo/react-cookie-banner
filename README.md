@@ -1,4 +1,4 @@
-[![Build Status](https://drone.our.buildo.io/api/badges/buildo/react-cookie-banner/status.svg)](https://drone.our.buildo.io/buildo/react-cookie-banner) ![](https://img.shields.io/npm/v/react-cookie-banner.svg?maxAge=2592000)
+[![Build Status](https://drone.our.buildo.io/api/badges/buildo/react-cookie-banner/status.svg)](https://drone.our.buildo.io/buildo/react-cookie-banner) ![](https://img.shields.io/npm/v/react-cookie-banner.svg)
 
 # React Cookie Banner
 
