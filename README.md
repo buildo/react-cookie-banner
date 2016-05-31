@@ -14,7 +14,7 @@ React.renderComponent(
     <CookieBanner
       message='Yes, we use cookies. If you don't like it change website, we won't miss you!'
       onAccept={() => {}}
-      cookie='user-has-accepted-cookies'/>
+      cookie='user-has-accepted-cookies' />
   </div>,
   document.body);
 ```
@@ -34,6 +34,7 @@ onAccept:                 React.PropTypes.func,
 link:                     React.PropTypes.shape({
                             msg: React.PropTypes.string, // defaults to 'Learn more'
                             url: React.PropTypes.string.isRequired,
+                            target: React.PropTypes.oneOf(['_blank', '_self', '_parent', '_top', 'framename'])
                           }),
 buttonMessage:            React.PropTypes.string,
 cookie:                   React.PropTypes.string, // defaults to 'accepts-cookie'
