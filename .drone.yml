@@ -1,6 +1,6 @@
 build:
   cookiebanner:
-    image: node:6
+    image: quay.io/buildo/node5-npm3-chrome
     commands:
       - npm install
       - npm test
