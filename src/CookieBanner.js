@@ -10,7 +10,8 @@ const propTypes = {
   onAccept: React.PropTypes.func,
   link: React.PropTypes.shape({
     msg: React.PropTypes.string,
-    url: React.PropTypes.string.isRequired
+    url: React.PropTypes.string.isRequired,
+    target: _react2['default'].PropTypes.oneOf(['_blank', '_self', '_parent', '_top', 'framename'])
   }),
   buttonMessage: React.PropTypes.string,
   cookie: React.PropTypes.string,
@@ -115,6 +116,7 @@ export default React.createClass({
       return (
         <a
           href={link.url}
+          target: link.target,
           className='cookie-link'
           style={this.getStyle('link')}>
             {link.msg || 'Learn more'}
