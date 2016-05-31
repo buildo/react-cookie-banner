@@ -1,0 +1,6 @@
+build:
+  cookiebanner:
+    image: node:6
+    commands:
+      - npm install
+      - npm test
