@@ -14,14 +14,17 @@ const resetCookies = function () {
   }
 };
 
-const renderBanner = () => {
+const renderBanner = (props) => {
   const component =
     <div>
-      <CookieBanner message='cookie message' />
+      <CookieBanner message='cookie message' {...props} />
     </div>;
   const cookieWrapper = TestUtils.renderIntoDocument(component);
 
-  return TestUtils.scryRenderedDOMComponentsWithClass(cookieWrapper, 'react-cookie-banner');
+  return {
+    wrapper: cookieWrapper,
+    banner: TestUtils.scryRenderedDOMComponentsWithClass(cookieWrapper, 'react-cookie-banner')
+  };
 };
 
 beforeEach(resetCookies);
@@ -29,18 +32,27 @@ beforeEach(resetCookies);
 describe('CookieBanner', function() {
 
   it('should be displayed if no cookies are set', function() {
-    const banner = renderBanner();
+    const banner = renderBanner().banner;
     expect(banner.length).toBe(1, 'cookie banner is not displayed');
   });
 
   it('should hide on click', function() {
-    const banner = renderBanner()[0];
+    const banner = renderBanner().banner[0];
     const closeButton = TestUtils.findRenderedDOMComponentWithClass(banner, 'button-close');
     TestUtils.Simulate.click(closeButton);
 
-    const banner2 = renderBanner()[0];
+    const banner2 = renderBanner().banner[0];
     const cookieBanner2 = TestUtils.scryRenderedDOMComponentsWithClass(banner2, 'react-cookie-banner');
     expect(cookieBanner2.length).toBe(0, 'cookie banner is displayed');
+  });
+
+  it('should hide on click when dismissOnScroll is false', function() {
+    const { banner, wrapper } = renderBanner({ dismissOnScroll: false });
+    const closeButton = TestUtils.findRenderedDOMComponentWithClass(banner[0], 'button-close');
+    TestUtils.Simulate.click(closeButton);
+
+    const cookieBanners = TestUtils.scryRenderedDOMComponentsWithClass(wrapper, 'react-cookie-banner');
+    expect(cookieBanners.length).toBe(0, 'cookie banner is displayed');
   });
 
   it('should be displayed with correct message', function() {
