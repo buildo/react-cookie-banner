@@ -49,6 +49,7 @@ export default React.createClass({
 
   componentDidMount() {
     this.addOnScrollListener();
+    this.addOnLeavePageListener();
   },
 
   addOnScrollListener(props) {
@@ -56,9 +57,9 @@ export default React.createClass({
     if (!this.state.listeningScroll && !this.hasAcceptedCookies() && props.dismissOnScroll) {
       if (window.attachEvent) {
         //Internet Explorer
-        window.attachEvent('onmousewheel', this.onScroll);
+        window.attachEvent('onwheel', this.onScroll);
       } else if(window.addEventListener) {
-        window.addEventListener('mousewheel', this.onScroll, false);
+        window.addEventListener('wheel', this.onScroll, false);
       }
       this.setState({ listeningScroll: true });
     }
@@ -68,9 +69,9 @@ export default React.createClass({
     if (this.state.listeningScroll) {
       if (window.detachEvent) {
         //Internet Explorer
-        window.detachEvent('onmousewheel', this.onScroll);
+        window.detachEvent('onwheel', this.onScroll);
       } else if(window.removeEventListener) {
-        window.removeEventListener('mousewheel', this.onScroll, false);
+        window.removeEventListener('wheel', this.onScroll, false);
       }
       this.setState({ listeningScroll: false });
     }
@@ -166,6 +167,10 @@ export default React.createClass({
 
   componentWillUnmount() {
     this.removeOnScrollListener();
+  },
+
+  addOnLeavePageListener(){
+    window.onbeforeunload = this.onAccept;
   }
 
 });
