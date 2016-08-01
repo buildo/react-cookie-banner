@@ -49,6 +49,7 @@ export default React.createClass({
 
   componentDidMount() {
     this.addOnScrollListener();
+    this.addOnLeavePageListener();
   },
 
   addOnScrollListener(props) {
@@ -166,6 +167,10 @@ export default React.createClass({
 
   componentWillUnmount() {
     this.removeOnScrollListener();
+  },
+
+  addOnLeavePageListener(){
+    window.onbeforeunload = this.onAccept;
   }
 
 });
