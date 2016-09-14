@@ -24,6 +24,20 @@ const Props = {
   className: t.maybe(t.String)
 };
 
+
+/** React Cookie banner dismissable with just a scroll!
+ * @param children - custom component rendered if user has not accepted cookies
+ * @param message - message written inside default cookie banner
+ * @param onAccept - called when user accepts cookies
+ * @param link - object with infos used to render a link to your cookie-policy page
+ * @param buttonMessage - message written inside the button of the default cookie banner
+ * @param cookie - cookie-key used to save user's decision about you cookie-policy
+ * @param dismissOnScroll - wheter the cookie banner should be dismissed on scroll or not
+ * @param dismissOnScrollThreshold - amount of pixel the user need to scroll to dismiss the cookie banner
+ * @param closeIcon - className passed to close-icon
+ * @param disableStyle - pass `true` if you want to disable default style
+ * @param styles - object with custom styles used to overwrite default ones
+ */
 @props(Props, { strict: false })
 export default class CookieBanner extends React.Component {
 
