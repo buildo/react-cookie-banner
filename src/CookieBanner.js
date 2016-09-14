@@ -1,57 +1,48 @@
 import React from 'react';
 import cx from 'classnames';
 import omit from 'lodash.omit';
-import assign from 'lodash.assign';
+import { t, props } from 'tcomb-react';
 import { cookie as cookieLite } from 'browser-cookie-lite';
 import styleUtils from './styleUtils';
 
-const propTypes = {
-  message: React.PropTypes.string,
-  onAccept: React.PropTypes.func,
-  link: React.PropTypes.shape({
-    msg: React.PropTypes.string,
-    url: React.PropTypes.string.isRequired,
-    target: React.PropTypes.oneOf(['_blank', '_self', '_parent', '_top', 'framename'])
-  }),
-  buttonMessage: React.PropTypes.string,
-  cookie: React.PropTypes.string,
-  dismissOnScroll: React.PropTypes.bool,
-  dismissOnScrollThreshold: React.PropTypes.number,
-  closeIcon: React.PropTypes.string,
-  disableStyle: React.PropTypes.bool,
-  styles: React.PropTypes.object,
-  children: React.PropTypes.element,
-  className: React.PropTypes.string
+const Props = {
+  children: t.maybe(t.ReactChildren),
+  message: t.maybe(t.String),
+  onAccept: t.maybe(t.Function),
+  link: t.maybe(t.struct({
+    msg: t.maybe(t.String),
+    url: t.String,
+    target: t.maybe(t.enums.of(['_blank', '_self', '_parent', '_top', 'framename']))
+  })),
+  buttonMessage: t.maybe(t.String),
+  cookie: t.maybe(t.String),
+  dismissOnScroll: t.maybe(t.Boolean),
+  dismissOnScrollThreshold: t.maybe(t.Number),
+  closeIcon: t.maybe(t.String),
+  disableStyle: t.maybe(t.Boolean),
+  styles: t.maybe(t.Object),
+  className: t.maybe(t.String)
 };
 
-export default React.createClass({
+@props(Props, { strict: false })
+export default class CookieBanner extends React.Component {
 
-  displayName: 'CookieBanner',
+  static defaultProps = {
+    onAccept: () => {},
+    dismissOnScroll: true,
+    cookie: 'accepts-cookies',
+    buttonMessage: 'Got it',
+    dismissOnScrollThreshold: 0,
+    styles: {}
+  };
 
-  propTypes: propTypes,
-
-  getDefaultProps() {
-    return {
-      onAccept: () => {},
-      dismissOnScroll: true,
-      cookie: 'accepts-cookies',
-      buttonMessage: 'Got it',
-      dismissOnScrollThreshold: 0,
-      styles: {}
-    };
-  },
-
-  getInitialState() {
-    return {
-      listeningScroll: false
-    };
-  },
+  state = { listeningScroll: false }
 
   componentDidMount() {
     this.addOnScrollListener();
-  },
+  }
 
-  addOnScrollListener(props) {
+  addOnScrollListener = (props) => {
     props = props || this.props;
     if (!this.state.listeningScroll && !this.hasAcceptedCookies() && props.dismissOnScroll) {
       if (window.attachEvent) {
@@ -62,9 +53,9 @@ export default React.createClass({
       }
       this.setState({ listeningScroll: true });
     }
-  },
+  }
 
-  removeOnScrollListener() {
+  removeOnScrollListener = () => {
     if (this.state.listeningScroll) {
       if (window.detachEvent) {
         //Internet Explorer
@@ -74,16 +65,16 @@ export default React.createClass({
       }
       this.setState({ listeningScroll: false });
     }
-  },
+  }
 
-  onScroll() {
+  onScroll = () => {
     // tacit agreement buahaha! (evil laugh)
     if (window.pageYOffset > this.props.dismissOnScrollThreshold) {
       this.onAccept();
     }
-  },
+  }
 
-  onAccept() {
+  onAccept = () => {
     const { cookie, onAccept } = this.props;
     cookieLite(cookie, true, 60*60*24*365);
     onAccept({ cookie });
@@ -93,17 +84,17 @@ export default React.createClass({
     } else {
       this.forceUpdate();
     }
-  },
+  }
 
-  getStyle(style) {
+  getStyle = (style) => {
     const { disableStyle, styles } = this.props;
     if (!disableStyle) {
       // apply custom styles if available
-      return assign({}, styleUtils.getStyle(style), styles[style]);
+      return { ...styleUtils.getStyle(style), ...styles[style] };
     }
-  },
+  }
 
-  getCloseButton() {
+  getCloseButton = () => {
     const { closeIcon, buttonMessage } = this.props;
     if (closeIcon) {
       return <i className={closeIcon} onClick={this.onAccept} style={this.getStyle('icon')}/>;
@@ -113,9 +104,9 @@ export default React.createClass({
         {buttonMessage}
       </div>
     );
-  },
+  }
 
-  getLink() {
+  getLink = () => {
     const { link } = this.props;
     if (link) {
       return (
@@ -128,15 +119,15 @@ export default React.createClass({
         </a>
       );
     }
-  },
+  }
 
-  getBanner() {
+  getBanner = () => {
     const { children, className, message } = this.props;
     if (children) {
       return children;
     }
 
-    const props = omit(this.props, Object.keys(propTypes));
+    const props = omit(this.props, Object.keys(Props));
     return (
       <div {...props} className={cx('react-cookie-banner', className)} style={this.getStyle('banner')}>
         <span className='cookie-message' style={this.getStyle('message')}>
@@ -146,15 +137,15 @@ export default React.createClass({
         {this.getCloseButton()}
       </div>
     );
-  },
+  }
 
-  hasAcceptedCookies() {
+  hasAcceptedCookies = () => {
     return (typeof window !== 'undefined') && cookieLite(this.props.cookie);
-  },
+  }
 
   render() {
     return this.hasAcceptedCookies() ? null : this.getBanner();
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.dismissOnScroll) {
@@ -162,10 +153,10 @@ export default React.createClass({
     } else {
       this.removeOnScrollListener();
     }
-  },
+  }
 
   componentWillUnmount() {
     this.removeOnScrollListener();
   }
 
-});
+}

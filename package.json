@@ -33,10 +33,10 @@
   },
   "homepage": "https://github.com/buildo/react-cookie-banner",
   "dependencies": {
-    "browser-cookie-lite": "^1.0.4",
+    "browser-cookie-lite": "1.0.4",
     "classnames": "^2.1.5",
-    "lodash.assign": "^3.2.0",
-    "lodash.omit": "^3.1.0"
+    "lodash.omit": "^3.1.0",
+    "tcomb-react": "^0.9.3"
   },
   "devDependencies": {
     "babel": "^5.8.12",
