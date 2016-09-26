@@ -3,9 +3,6 @@ class Example extends React.Component {
   constructor(props) {
     super(props);
     cookie('accepts-cookies', '');
-    this.state = {
-      dismissOnScroll: true
-    };
   }
 
   resetCookies = () => {
@@ -13,31 +10,59 @@ class Example extends React.Component {
     this.forceUpdate();
   }
 
-  toggleDismissOnScroll = () => {
-    this.setState({ dismissOnScroll: !this.state.dismissOnScroll });
-  }
-
   onAccept = () => this.forceUpdate()
 
   render() {
+
     return (
       <div>
-        {/*POSITION FIXED ONLY FOR EXAMPLE PURPOSE*/}
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 999 }}>
+        <div style={{ position: 'fixed', bottom: 0, left: 0, width: '100%', zIndex: 999 }}>
           <CookieBanner
-            styles={{ button: { color: 'blue' } } }
-            dismissOnScroll={this.state.dismissOnScroll}
-            message='your own custom message'
-            link={{ msg: 'link to cookie policy', url: 'http://nocookielaw.com/' }}
-            buttonMessage='close button message'
-            onAccept={this.onAccept}
-          />
+          styles={{
+            banner: {
+              fontFamily: 'Source Sans Pro',
+              height: 57,
+              background: 'rgba(52, 64, 81, 0.88) url(./showroom/icons/cookie.png) 20px 50% no-repeat',
+              backgroundSize: '30px 30px',
+              backgroundColor: '',
+              fontSize: '15px',
+              fontWeight: 600
+            },
+            button: {
+              border: '1px solid white',
+              borderRadius: 4,
+              width: 66,
+              height: 32,
+              lineHeight: '32px',
+              background: 'transparent',
+              color: 'white',
+              fontSize: '14px',
+              fontWeight: 600,
+              opacity: 1,
+              right: 20,
+              marginTop: -18
+            },
+            message: {
+              display: 'block',
+              padding: '9px 67px',
+              lineHeight: 1.3,
+              textAlign: 'left',
+              marginRight: 244,
+              color: 'white'
+            },
+            link: {
+              textDecoration: 'none',
+              fontWeight: 'bold'
+            }
+          }}
+          message='Buildo uses cookies to guarantee users the employment of its site features, offering a better purchasing experience. By continuing to browse the site you&quot;re agreeing to our use of cookies.'
+          link={{msg: 'More information on our use of cookies', url: 'http://nocookielaw.com/'}}
+          buttonMessage='Close'
+          onAccept={this.onAccept}/>
         </div>
         <div>
           <p>accepts-cookies: {cookie('accepts-cookies') ? 'true' : 'false'}</p>
-          <button onClick={this.toggleDismissOnScroll}>{this.state.dismissOnScroll ? 'Disable' : 'Activate'} "dismissOnScroll"</button>
-          <button onClick={this.resetCookies}>Reset Cookies</button>
-          <h2>Try dismissing with a scroll</h2>
+          <Button onClick={this.resetCookies}>Reset Cookies</Button>
         </div>
       </div>
     );
