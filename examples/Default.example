@@ -30,7 +30,7 @@ class Example extends React.Component {
               banner: {
                 fontFamily: 'Source Sans Pro',
                 height: 57,
-                background: 'rgba(52, 64, 81, 0.88) url(./showroom/icons/cookie.png) 20px 50% no-repeat',
+                background: 'rgba(52, 64, 81, 0.88) url(https://rawgit.com/buildo/react-cookie-banner/master/examples/cookie.png) 20px 50% no-repeat',
                 backgroundSize: '30px 30px',
                 backgroundColor: '',
                 fontSize: '15px',
