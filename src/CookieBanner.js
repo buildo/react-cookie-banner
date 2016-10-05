@@ -5,6 +5,8 @@ import { t, props } from 'tcomb-react';
 import { cookie as cookieLite } from 'browser-cookie-lite';
 import styleUtils from './styleUtils';
 
+const NotEmptyStruct = t.refinement(t.struct, x => Object.keys(x).length > 0);
+
 const Props = {
   children: t.maybe(t.ReactChildren),
   message: t.maybe(t.String),
@@ -16,6 +18,11 @@ const Props = {
   })),
   buttonMessage: t.maybe(t.String),
   cookie: t.maybe(t.String),
+  cookieExpiration: t.maybe(t.union([NotEmptyStruct({
+    years: t.maybe(t.Number),
+    days: t.maybe(t.Number),
+    hours: t.maybe(t.Number)
+  }), t.Integer])),
   dismissOnScroll: t.maybe(t.Boolean),
   dismissOnScrollThreshold: t.maybe(t.Number),
   closeIcon: t.maybe(t.String),
@@ -45,6 +52,7 @@ export default class CookieBanner extends React.Component {
     onAccept: () => {},
     dismissOnScroll: true,
     cookie: 'accepts-cookies',
+    cookieExpiration: { years: 1 },
     buttonMessage: 'Got it',
     dismissOnScrollThreshold: 0,
     styles: {}
@@ -89,8 +97,17 @@ export default class CookieBanner extends React.Component {
   }
 
   onAccept = () => {
-    const { cookie, onAccept } = this.props;
-    cookieLite(cookie, true, 60*60*24*365);
+    const { cookie, cookieExpiration, onAccept } = this.props;
+
+    const SECONDS_IN_YEAR = 31536000;
+    const SECONDS_IN_DAY = 86400;
+    const SECONDS_IN_HOUR = 3600;
+
+    const secondsSinceExpiration = t.Integer.is(cookieExpiration) ?
+      cookieExpiration :
+      (cookieExpiration.years * SECONDS_IN_YEAR) + (cookieExpiration.days * SECONDS_IN_DAY) + (cookieExpiration.hours * SECONDS_IN_HOUR);
+
+    cookieLite(cookie, true, secondsSinceExpiration);
     onAccept({ cookie });
 
     if (this.state.listeningScroll) {
