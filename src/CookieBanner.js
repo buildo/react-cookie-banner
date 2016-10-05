@@ -4,12 +4,13 @@ import omit from 'lodash.omit';
 import { t, props } from 'tcomb-react';
 import { cookie as cookieLite } from 'browser-cookie-lite';
 import styleUtils from './styleUtils';
+t.interface.strict = true;
 
 const Props = {
   children: t.maybe(t.ReactChildren),
   message: t.maybe(t.String),
   onAccept: t.maybe(t.Function),
-  link: t.maybe(t.struct({
+  link: t.maybe(t.interface({
     msg: t.maybe(t.String),
     url: t.String,
     target: t.maybe(t.enums.of(['_blank', '_self', '_parent', '_top', 'framename']))
