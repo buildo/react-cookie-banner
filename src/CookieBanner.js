@@ -4,18 +4,27 @@ import omit from 'lodash.omit';
 import { t, props } from 'tcomb-react';
 import { cookie as cookieLite } from 'browser-cookie-lite';
 import styleUtils from './styleUtils';
+t.interface.strict = true;
 
 const Props = {
   children: t.maybe(t.ReactChildren),
   message: t.maybe(t.String),
   onAccept: t.maybe(t.Function),
-  link: t.maybe(t.struct({
+  link: t.maybe(t.interface({
     msg: t.maybe(t.String),
     url: t.String,
     target: t.maybe(t.enums.of(['_blank', '_self', '_parent', '_top', 'framename']))
   })),
   buttonMessage: t.maybe(t.String),
   cookie: t.maybe(t.String),
+  cookieExpiration: t.maybe(t.union([
+    t.Integer,
+    t.interface({
+      years: t.maybe(t.Number),
+      days: t.maybe(t.Number),
+      hours: t.maybe(t.Number)
+    })
+  ])),
   dismissOnScroll: t.maybe(t.Boolean),
   dismissOnScrollThreshold: t.maybe(t.Number),
   closeIcon: t.maybe(t.String),
@@ -45,6 +54,7 @@ export default class CookieBanner extends React.Component {
     onAccept: () => {},
     dismissOnScroll: true,
     cookie: 'accepts-cookies',
+    cookieExpiration: { years: 1 },
     buttonMessage: 'Got it',
     dismissOnScrollThreshold: 0,
     styles: {}
@@ -88,9 +98,29 @@ export default class CookieBanner extends React.Component {
     }
   }
 
+  getSecondsSinceExpiration = cookieExpiration => {
+    if (t.Integer.is(cookieExpiration)) {
+      return cookieExpiration;
+    }
+
+    const SECONDS_IN_YEAR = 31536000;
+    const SECONDS_IN_DAY = 86400;
+    const SECONDS_IN_HOUR = 3600;
+
+    const _cookieExpiration = {
+      years: 0, days: 0, hours: 0,
+      ...cookieExpiration
+    };
+
+    const { years, days, hours } = _cookieExpiration;
+
+    return (years * SECONDS_IN_YEAR) + (days * SECONDS_IN_DAY) + (hours * SECONDS_IN_HOUR);
+  }
+
   onAccept = () => {
-    const { cookie, onAccept } = this.props;
-    cookieLite(cookie, true, 60*60*24*365);
+    const { cookie, cookieExpiration, onAccept } = this.props;
+
+    cookieLite(cookie, true, this.getSecondsSinceExpiration(cookieExpiration));
     onAccept({ cookie });
 
     if (this.state.listeningScroll) {
