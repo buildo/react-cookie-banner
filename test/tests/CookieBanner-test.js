@@ -30,6 +30,24 @@ const renderBanner = (props) => {
 
 beforeEach(resetCookies);
 
+describe('secondsSinceExpiration', () => {
+  const { getSecondsSinceExpiration } = new CookieBanner();
+
+  it('should return "cookieExpiration" if it is an integer', () => {
+    expect(getSecondsSinceExpiration(12345)).toBe(12345);
+  });
+
+  it('should transform "years", "days" and "hours" into seconds', () => {
+    expect(getSecondsSinceExpiration({ years: 1, days: 10, hours: 5 })).toBe(32418000);
+  });
+
+  it('should handle missing "years", "days" or "hours"', () => {
+    expect(getSecondsSinceExpiration({ days: 10 })).toBe(864000);
+    expect(getSecondsSinceExpiration({})).toBe(0);
+  });
+
+});
+
 describe('CookieBanner', () => {
 
   it('should be displayed if no cookies are set', () => {
