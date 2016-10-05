@@ -17,11 +17,14 @@ const Props = {
   })),
   buttonMessage: t.maybe(t.String),
   cookie: t.maybe(t.String),
-  cookieExpiration: t.maybe(t.union([t.interface({
-    years: t.maybe(t.Number),
-    days: t.maybe(t.Number),
-    hours: t.maybe(t.Number)
-  }), t.Integer])),
+  cookieExpiration: t.maybe(t.union([
+    t.Integer,
+    t.interface({
+      years: t.maybe(t.Number),
+      days: t.maybe(t.Number),
+      hours: t.maybe(t.Number)
+    })
+  ])),
   dismissOnScroll: t.maybe(t.Boolean),
   dismissOnScrollThreshold: t.maybe(t.Number),
   closeIcon: t.maybe(t.String),
