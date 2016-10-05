@@ -41,7 +41,8 @@ const Props = {
  * @param link - object with infos used to render a link to your cookie-policy page
  * @param buttonMessage - message written inside the button of the default cookie banner
  * @param cookie - cookie-key used to save user's decision about you cookie-policy
- * @param dismissOnScroll - wheter the cookie banner should be dismissed on scroll or not
+ * @param cookieExpiration - used to set the cookie expiration
+ * @param dismissOnScroll - whether the cookie banner should be dismissed on scroll or not
  * @param dismissOnScrollThreshold - amount of pixel the user need to scroll to dismiss the cookie banner
  * @param closeIcon - className passed to close-icon
  * @param disableStyle - pass `true` if you want to disable default style
