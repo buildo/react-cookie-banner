@@ -4,21 +4,22 @@ import expect from 'expect';
 import CookieBanner from '../../src/CookieBanner';
 
 const resetCookies = function () {
-  const cookies = document.cookie.split(";");
+  const cookies = document.cookie.split(';');
 
   for (let i = 0; i < cookies.length; i++) {
     const cookie = cookies[i];
-    const eqPos = cookie.indexOf("=");
+    const eqPos = cookie.indexOf('=');
     const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT`;
   }
 };
 
 const renderBanner = (props) => {
-  const component =
+  const component = (
     <div>
       <CookieBanner message='cookie message' {...props} />
-    </div>;
+    </div>
+  );
   const cookieWrapper = TestUtils.renderIntoDocument(component);
 
   return {
@@ -29,14 +30,14 @@ const renderBanner = (props) => {
 
 beforeEach(resetCookies);
 
-describe('CookieBanner', function() {
+describe('CookieBanner', () => {
 
-  it('should be displayed if no cookies are set', function() {
+  it('should be displayed if no cookies are set', () => {
     const banner = renderBanner().banner;
     expect(banner.length).toBe(1, 'cookie banner is not displayed');
   });
 
-  it('should hide on click', function() {
+  it('should hide on click', () => {
     const banner = renderBanner().banner[0];
     const closeButton = TestUtils.findRenderedDOMComponentWithClass(banner, 'button-close');
     TestUtils.Simulate.click(closeButton);
@@ -46,7 +47,7 @@ describe('CookieBanner', function() {
     expect(cookieBanner2.length).toBe(0, 'cookie banner is displayed');
   });
 
-  it('should hide on click when dismissOnScroll is false', function() {
+  it('should hide on click when dismissOnScroll is false', () => {
     const { banner, wrapper } = renderBanner({ dismissOnScroll: false });
     const closeButton = TestUtils.findRenderedDOMComponentWithClass(banner[0], 'button-close');
     TestUtils.Simulate.click(closeButton);
@@ -55,7 +56,7 @@ describe('CookieBanner', function() {
     expect(cookieBanners.length).toBe(0, 'cookie banner is displayed');
   });
 
-  it('should be displayed with correct message', function() {
+  it('should be displayed with correct message', () => {
     const cookieWrapper = TestUtils.renderIntoDocument(
       <div>
         <CookieBanner message='cookie message' />
@@ -67,7 +68,7 @@ describe('CookieBanner', function() {
     expect(message.innerHTML).toBe('cookie message', 'wrong message displayed');
   });
 
-  it('should be replaced with custom child component', function() {
+  it('should be replaced with custom child component', () => {
 
     const MyComponent = React.createClass({
       render() {
@@ -75,12 +76,13 @@ describe('CookieBanner', function() {
       }
     });
 
-    const component =
+    const component = (
       <div>
         <CookieBanner>
           <MyComponent />
         </CookieBanner>
-      </div>;
+      </div>
+    );
 
     const cookieWrapper = TestUtils.renderIntoDocument(component);
 
