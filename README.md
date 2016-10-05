@@ -16,47 +16,31 @@ React.renderComponent(
       onAccept={() => {}}
       cookie='user-has-accepted-cookies' />
   </div>,
-  document.body);
+  document.body
+);
 ```
+
 [Live Demo](https://rawgit.com/buildo/react-cookie-banner/master/examples/index.html)
 
 [More Examples](https://github.com/buildo/react-cookie-banner/tree/master/examples)
 
-###Install
+### Install
 ```
 npm install --save react-cookie-banner
 ```
 
-###API
-```jsx
-message:                  React.PropTypes.string,
-onAccept:                 React.PropTypes.func,
-link:                     React.PropTypes.shape({
-                            msg: React.PropTypes.string, // defaults to 'Learn more'
-                            url: React.PropTypes.string.isRequired,
-                            target: React.PropTypes.oneOf(['_blank', '_self', '_parent', '_top', 'framename'])
-                          }),
-buttonMessage:            React.PropTypes.string,
-cookie:                   React.PropTypes.string, // defaults to 'accepts-cookie'
-dismissOnScroll:          React.PropTypes.bool, // true by default!
-dismissOnScrollThreshold: React.PropTypes.number, // defaults to 0
-closeIcon:                React.PropTypes.string, // this should be the className of the icon. if undefined use button
-disableStyle:             React.PropTypes.bool,
-styles:                   React.PropTypes.object, // override styles
-className:                React.PropTypes.string,
-children:                 React.PropTypes.element // rendered in replacement without any <div> wrapper
-```
-**Coming next**:
-```jsx
-shortMessage: React.PropTypes.string, // to be used with smaller screens
-```
+### API
+You can see `CookieBanner`'s props in its own [README.md](https://github.com/buildo/react-cookie-banner/blob/master/src/README.md)
 
-###Style
+### Style
 ReactCookieBanner by default uses its simple inline style. However you can easily disable it by passing
+
 ```jsx
 <CookieBanner disableStyle={true} />
 ```
+
 In this case you can style it using css classes. The banner is structured as follows:
+
 ```html
 <div className={this.props.className + ' react-cookie-banner'}
   <span className='cookie-message'>
@@ -70,24 +54,35 @@ In this case you can style it using css classes. The banner is structured as fol
   </div>
 </div>
 ```
+
 You can also pass your own CustomCookieBanner as child component which will be rendered in replacement:
+
 ```jsx
 <CookieBanner>
-  <CustomCookieBanner {...myCustomProps} /> // rendered directly without any <div> wrapper
+  <CustomCookieBanner {...myCustomProps} /> {/* rendered directly without any <div> wrapper */}
 </CookieBanner>
 ```
+
 Or you override the predefined inline-styles. This examples puts the message font back to normal weight and makes the banner slightly transparent:
+
 ```jsx
-<CookieBanner styles={{banner: {backgroundColor: 'rgba(60, 60, 60, 0.8)'}, 
-  message: {fontWeight: 400}}} message="..." />
+<CookieBanner
+  styles={{
+    banner: { backgroundColor: 'rgba(60, 60, 60, 0.8)' },
+    message: { fontWeight: 400 }
+  }}
+  message='...'
+/>
 ```
+
 See `src/styleUtils.js` for which style objects are availble to be overridden.
 
-###Cookie manipulation
-ReactCookieBanner uses and exports the library **```browser-cookie-lite```**
+### Cookie manipulation
+ReactCookieBanner uses and exports the library **`browser-cookie-lite`**
 
 You can import and use it as follows:
-```es6
+
+```js
 import {cookie} from 'react-cookie-banner';
 
 // simple set
@@ -99,4 +94,5 @@ cookie("test")
 // destroy
 cookie("test", "", -1)
 ```
+
 Please refer to [browser-cookie-lite](https://github.com/litejs/browser-cookie-lite) repo for more documentation.
