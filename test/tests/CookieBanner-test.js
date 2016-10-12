@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react/addons';
+import React from 'react/addons';
 const TestUtils = React.addons.TestUtils;
 import expect from 'expect';
 import CookieBanner from '../../src/CookieBanner';
@@ -108,7 +108,7 @@ describe('CookieBanner', () => {
     expect(banner.length).toBe(0, 'cookie banner is being displayed');
 
     const _myComponent = TestUtils.scryRenderedDOMComponentsWithClass(cookieWrapper, 'my-component');
-    expect(_myComponent.length).toBe(1, 'cookie banner is not displaing custom child component');
+    expect(_myComponent.length).toBe(1, 'cookie banner is not displaying custom child component');
   });
 
   it('should be replaced with custom child component using function', () => {
@@ -119,14 +119,10 @@ describe('CookieBanner', () => {
       }
     });
 
-    MyOtherComponent.propTypes = {
-      onAccept: PropTypes.func
-    };
-
     const component = (
       <div>
         <CookieBanner>
-          {(onAccept) => { return (<MyOtherComponent onAccept={onAccept} />); }}
+          {onAccept => <MyOtherComponent onAccept={onAccept} />}
         </CookieBanner>
       </div>
     );
@@ -137,7 +133,7 @@ describe('CookieBanner', () => {
     expect(banner.length).toBe(0, 'cookie banner is being displayed');
 
     const _myComponent = TestUtils.scryRenderedDOMComponentsWithClass(cookieWrapper, 'my-other-component');
-    expect(_myComponent.length).toBe(1, 'cookie banner is not displaing custom child component using function');
+    expect(_myComponent.length).toBe(1, 'cookie banner is not displaying custom child component using function');
   });
 
 });

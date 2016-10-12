@@ -172,7 +172,7 @@ export default class CookieBanner extends React.Component {
   getBanner = () => {
     const { children, className, message } = this.props;
     if (children) {
-      if (typeof children === 'function') {
+      if (t.Function.is(children)) {
         return children(this.onAccept);
       }
       return children;
