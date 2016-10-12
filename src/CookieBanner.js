@@ -7,7 +7,10 @@ import styleUtils from './styleUtils';
 t.interface.strict = true;
 
 const Props = {
-  children: t.maybe(t.ReactChildren),
+  children: t.maybe(t.union([
+    t.ReactChildren,
+    t.Function
+  ])),
   message: t.maybe(t.String),
   onAccept: t.maybe(t.Function),
   link: t.maybe(t.interface({
@@ -169,6 +172,9 @@ export default class CookieBanner extends React.Component {
   getBanner = () => {
     const { children, className, message } = this.props;
     if (children) {
+      if (typeof children === 'function') {
+        return children(this.onAccept);
+      }
       return children;
     }
 
