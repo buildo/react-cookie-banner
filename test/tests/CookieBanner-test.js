@@ -108,7 +108,32 @@ describe('CookieBanner', () => {
     expect(banner.length).toBe(0, 'cookie banner is being displayed');
 
     const _myComponent = TestUtils.scryRenderedDOMComponentsWithClass(cookieWrapper, 'my-component');
-    expect(_myComponent.length).toBe(1, 'cookie banner is not displaing custom child component');
+    expect(_myComponent.length).toBe(1, 'cookie banner is not displaying custom child component');
+  });
+
+  it('should be replaced with custom child component using function', () => {
+
+    const MyOtherComponent = React.createClass({
+      render() {
+        return <div className='my-other-component' onClick={this.props.onAccept}/>;
+      }
+    });
+
+    const component = (
+      <div>
+        <CookieBanner>
+          {onAccept => <MyOtherComponent onAccept={onAccept} />}
+        </CookieBanner>
+      </div>
+    );
+
+    const cookieWrapper = TestUtils.renderIntoDocument(component);
+
+    const banner = TestUtils.scryRenderedDOMComponentsWithClass(cookieWrapper, 'react-cookie-banner');
+    expect(banner.length).toBe(0, 'cookie banner is being displayed');
+
+    const _myComponent = TestUtils.scryRenderedDOMComponentsWithClass(cookieWrapper, 'my-other-component');
+    expect(_myComponent.length).toBe(1, 'cookie banner is not displaying custom child component using function');
   });
 
 });
