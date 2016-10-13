@@ -3,15 +3,14 @@ const TestUtils = React.addons.TestUtils;
 import expect from 'expect';
 import CookieBanner from '../../src/CookieBanner';
 
-const resetCookies = function () {
+const resetCookies = function() {
   const cookies = document.cookie.split(';');
 
-  for (let i = 0; i < cookies.length; i++) {
-    const cookie = cookies[i];
+  cookies.forEach(cookie => {
     const eqPos = cookie.indexOf('=');
     const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
     document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT`;
-  }
+  });
 };
 
 const renderBanner = (props) => {
@@ -61,7 +60,10 @@ describe('CookieBanner', () => {
     TestUtils.Simulate.click(closeButton);
 
     const banner2 = renderBanner().banner[0];
-    const cookieBanner2 = TestUtils.scryRenderedDOMComponentsWithClass(banner2, 'react-cookie-banner');
+    const cookieBanner2 = TestUtils.scryRenderedDOMComponentsWithClass(
+      banner2,
+      'react-cookie-banner'
+    );
     expect(cookieBanner2.length).toBe(0, 'cookie banner is displayed');
   });
 
@@ -70,7 +72,10 @@ describe('CookieBanner', () => {
     const closeButton = TestUtils.findRenderedDOMComponentWithClass(banner[0], 'button-close');
     TestUtils.Simulate.click(closeButton);
 
-    const cookieBanners = TestUtils.scryRenderedDOMComponentsWithClass(wrapper, 'react-cookie-banner');
+    const cookieBanners = TestUtils.scryRenderedDOMComponentsWithClass(
+      wrapper,
+      'react-cookie-banner'
+    );
     expect(cookieBanners.length).toBe(0, 'cookie banner is displayed');
   });
 
@@ -81,18 +86,21 @@ describe('CookieBanner', () => {
       </div>
     );
 
-    const messageWrapper = TestUtils.findRenderedDOMComponentWithClass(cookieWrapper, 'cookie-message');
+    const messageWrapper = TestUtils.findRenderedDOMComponentWithClass(
+      cookieWrapper,
+      'cookie-message'
+    );
     const message = messageWrapper.getDOMNode().firstChild;
     expect(message.innerHTML).toBe('cookie message', 'wrong message displayed');
   });
 
   it('should be replaced with custom child component', () => {
 
-    const MyComponent = React.createClass({
+    class MyComponent extends React.Component {
       render() {
         return <div className='my-component'/>;
       }
-    });
+    }
 
     const component = (
       <div>
@@ -104,36 +112,52 @@ describe('CookieBanner', () => {
 
     const cookieWrapper = TestUtils.renderIntoDocument(component);
 
-    const banner = TestUtils.scryRenderedDOMComponentsWithClass(cookieWrapper, 'react-cookie-banner');
+    const banner = TestUtils.scryRenderedDOMComponentsWithClass(
+      cookieWrapper,
+      'react-cookie-banner'
+    );
     expect(banner.length).toBe(0, 'cookie banner is being displayed');
 
-    const _myComponent = TestUtils.scryRenderedDOMComponentsWithClass(cookieWrapper, 'my-component');
+    const _myComponent = TestUtils.scryRenderedDOMComponentsWithClass(
+      cookieWrapper,
+      'my-component'
+    );
     expect(_myComponent.length).toBe(1, 'cookie banner is not displaying custom child component');
   });
 
   it('should be replaced with custom child component using function', () => {
 
-    const MyOtherComponent = React.createClass({
+    class MyOtherComponent extends React.Component {
       render() {
         return <div className='my-other-component' onClick={this.props.onAccept}/>;
       }
-    });
+    }
+
+    const customTrigger = onAccept => <MyOtherComponent onAccept={onAccept} />;
 
     const component = (
       <div>
         <CookieBanner>
-          {onAccept => <MyOtherComponent onAccept={onAccept} />}
+          {customTrigger}
         </CookieBanner>
       </div>
     );
 
     const cookieWrapper = TestUtils.renderIntoDocument(component);
 
-    const banner = TestUtils.scryRenderedDOMComponentsWithClass(cookieWrapper, 'react-cookie-banner');
+    const banner = TestUtils.scryRenderedDOMComponentsWithClass(
+      cookieWrapper,
+      'react-cookie-banner'
+    );
     expect(banner.length).toBe(0, 'cookie banner is being displayed');
 
-    const _myComponent = TestUtils.scryRenderedDOMComponentsWithClass(cookieWrapper, 'my-other-component');
-    expect(_myComponent.length).toBe(1, 'cookie banner is not displaying custom child component using function');
+    const _myComponent = TestUtils.scryRenderedDOMComponentsWithClass(
+      cookieWrapper,
+      'my-other-component'
+    );
+    expect(_myComponent.length).toBe(1,
+      'cookie banner is not displaying custom child component using function'
+    );
   });
 
 });

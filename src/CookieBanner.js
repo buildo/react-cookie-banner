@@ -46,7 +46,8 @@ const Props = {
  * @param cookie - cookie-key used to save user's decision about you cookie-policy
  * @param cookieExpiration - used to set the cookie expiration
  * @param dismissOnScroll - whether the cookie banner should be dismissed on scroll or not
- * @param dismissOnScrollThreshold - amount of pixel the user need to scroll to dismiss the cookie banner
+ * @param dismissOnScrollThreshold -
+ *   amount of pixel the user need to scroll to dismiss the cookie banner
  * @param closeIcon - className passed to close-icon
  * @param disableStyle - pass `true` if you want to disable default style
  * @param styles - object with custom styles used to overwrite default ones
@@ -71,12 +72,12 @@ export default class CookieBanner extends React.Component {
   }
 
   addOnScrollListener = (props) => {
-    props = props || this.props;
-    if (!this.state.listeningScroll && !this.hasAcceptedCookies() && props.dismissOnScroll) {
+    const _props = props || this.props;
+    if (!this.state.listeningScroll && !this.hasAcceptedCookies() && _props.dismissOnScroll) {
       if (window.attachEvent) {
         //Internet Explorer
         window.attachEvent('onscroll', this.onScroll);
-      } else if(window.addEventListener) {
+      } else if (window.addEventListener) {
         window.addEventListener('scroll', this.onScroll, false);
       }
       this.setState({ listeningScroll: true });
@@ -88,7 +89,7 @@ export default class CookieBanner extends React.Component {
       if (window.detachEvent) {
         //Internet Explorer
         window.detachEvent('onscroll', this.onScroll);
-      } else if(window.removeEventListener) {
+      } else if (window.removeEventListener) {
         window.removeEventListener('scroll', this.onScroll, false);
       }
       this.setState({ listeningScroll: false });
@@ -162,7 +163,8 @@ export default class CookieBanner extends React.Component {
           href={link.url}
           target={link.target}
           className='cookie-link'
-          style={this.getStyle('link')}>
+          style={this.getStyle('link')}
+        >
             {link.msg || 'Learn more'}
         </a>
       );
@@ -179,8 +181,9 @@ export default class CookieBanner extends React.Component {
     }
 
     const props = omit(this.props, Object.keys(Props));
+    const computedClassName = cx('react-cookie-banner', className);
     return (
-      <div {...props} className={cx('react-cookie-banner', className)} style={this.getStyle('banner')}>
+      <div {...props} className={computedClassName} style={this.getStyle('banner')}>
         <span className='cookie-message' style={this.getStyle('message')}>
           {message}
           {this.getLink()}
