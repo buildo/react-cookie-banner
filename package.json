@@ -46,7 +46,6 @@
     "eslint": "^3.7.1",
     "eslint-config-buildo": "buildo/eslint-config",
     "eslint-loader": "^1.1.1",
-    "eslint-plugin-react": "^5",
     "expect": "^1.6.0",
     "isparta-loader": "^0.2.0",
     "karma": "^0.13.15",
