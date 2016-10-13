@@ -127,11 +127,11 @@ describe('CookieBanner', () => {
 
   it('should be replaced with custom child component using function', () => {
 
-    const MyOtherComponent = React.createClass({
+    class MyOtherComponent extends React.Component {
       render() {
         return <div className='my-other-component' onClick={this.props.onAccept}/>;
       }
-    });
+    }
 
     const component = (
       <div>
