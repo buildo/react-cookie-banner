@@ -52,4 +52,4 @@ const styles = {
 
 const getStyle = (style) => styles[style];
 
-export default {getStyle};
+export default { getStyle };
