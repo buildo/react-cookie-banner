@@ -133,10 +133,12 @@ describe('CookieBanner', () => {
       }
     }
 
+    const customTrigger = onAccept => <MyOtherComponent onAccept={onAccept} />;
+
     const component = (
       <div>
         <CookieBanner>
-          {onAccept => <MyOtherComponent onAccept={onAccept} />}
+          {customTrigger}
         </CookieBanner>
       </div>
     );
