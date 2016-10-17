@@ -28,6 +28,7 @@ const Props = {
       hours: t.maybe(t.Number)
     })
   ])),
+  dismissOnClick: t.maybe(t.Boolean),
   dismissOnScroll: t.maybe(t.Boolean),
   dismissOnScrollThreshold: t.maybe(t.Number),
   closeIcon: t.maybe(t.String),
@@ -45,6 +46,7 @@ const Props = {
  * @param buttonMessage - message written inside the button of the default cookie banner
  * @param cookie - cookie-key used to save user's decision about you cookie-policy
  * @param cookieExpiration - used to set the cookie expiration
+ * @param dismissOnClick - whether the cookie banner should be dismissed on click anywhere
  * @param dismissOnScroll - whether the cookie banner should be dismissed on scroll or not
  * @param dismissOnScrollThreshold -
  *   amount of pixel the user need to scroll to dismiss the cookie banner
@@ -57,6 +59,7 @@ export default class CookieBanner extends React.Component {
 
   static defaultProps = {
     onAccept: () => {},
+    dismissOnClick: false,
     dismissOnScroll: true,
     cookie: 'accepts-cookies',
     cookieExpiration: { years: 1 },
@@ -181,6 +184,8 @@ export default class CookieBanner extends React.Component {
     }
 
     const props = omit(this.props, Object.keys(Props));
+    if (this.props.dismissOnClick) props.onClick = this.onAccept;
+
     const computedClassName = cx('react-cookie-banner', className);
     return (
       <div {...props} className={computedClassName} style={this.getStyle('banner')}>
