@@ -1,24 +1,17 @@
 import React from 'react';
-import cx from 'classnames';
 import omit from 'lodash.omit';
 import { t, props } from 'tcomb-react';
 import { cookie as cookieLite } from 'browser-cookie-lite';
-import styleUtils from './styleUtils';
+import BannerContent, { Props as BannerContentProps } from './BannerContent';
 t.interface.strict = true;
 
 const Props = {
+  ...BannerContentProps,
   children: t.maybe(t.union([
     t.ReactChildren,
     t.Function
   ])),
-  message: t.maybe(t.String),
   onAccept: t.maybe(t.Function),
-  link: t.maybe(t.interface({
-    msg: t.maybe(t.String),
-    url: t.String,
-    target: t.maybe(t.enums.of(['_blank', '_self', '_parent', '_top', 'framename']))
-  })),
-  buttonMessage: t.maybe(t.String),
   cookie: t.maybe(t.String),
   cookieExpiration: t.maybe(t.union([
     t.Integer,
@@ -29,11 +22,7 @@ const Props = {
     })
   ])),
   dismissOnScroll: t.maybe(t.Boolean),
-  dismissOnScrollThreshold: t.maybe(t.Number),
-  closeIcon: t.maybe(t.String),
-  disableStyle: t.maybe(t.Boolean),
-  styles: t.maybe(t.Object),
-  className: t.maybe(t.String)
+  dismissOnScrollThreshold: t.maybe(t.Number)
 };
 
 
@@ -135,70 +124,44 @@ export default class CookieBanner extends React.Component {
     }
   }
 
-  getStyle = (style) => {
-    const { disableStyle, styles } = this.props;
-    if (!disableStyle) {
-      // apply custom styles if available
-      return { ...styleUtils.getStyle(style), ...styles[style] };
-    }
-  }
-
-  getCloseButton = () => {
-    const { closeIcon, buttonMessage } = this.props;
-    if (closeIcon) {
-      return <i className={closeIcon} onClick={this.onAccept} style={this.getStyle('icon')}/>;
-    }
-    return (
-      <div className='button-close' onClick={this.onAccept} style={this.getStyle('button')}>
-        {buttonMessage}
-      </div>
-    );
-  }
-
-  getLink = () => {
-    const { link } = this.props;
-    if (link) {
-      return (
-        <a
-          href={link.url}
-          target={link.target}
-          className='cookie-link'
-          style={this.getStyle('link')}
-        >
-            {link.msg || 'Learn more'}
-        </a>
-      );
-    }
-  }
-
-  getBanner = () => {
-    const { children, className, message } = this.props;
-    if (children) {
-      if (t.Function.is(children)) {
-        return children(this.onAccept);
-      }
-      return children;
-    }
-
-    const props = omit(this.props, Object.keys(Props));
-    const computedClassName = cx('react-cookie-banner', className);
-    return (
-      <div {...props} className={computedClassName} style={this.getStyle('banner')}>
-        <span className='cookie-message' style={this.getStyle('message')}>
-          {message}
-          {this.getLink()}
-        </span>
-        {this.getCloseButton()}
-      </div>
-    );
-  }
-
   hasAcceptedCookies = () => {
     return (typeof window !== 'undefined') && cookieLite(this.props.cookie);
   }
 
+  getLocals() {
+    const {
+      message, onAccept, link, buttonMessage, closeIcon,
+      disableStyle, styles, className, children, ...props
+    } = this.props;
+
+    return {
+      children,
+      hasAcceptedCookies: this.hasAcceptedCookies(),
+      bannerContentProps: {
+        ...omit(props, Object.keys(Props)),
+        message, onAccept, link, buttonMessage,
+        closeIcon, disableStyle, styles, className
+      }
+    };
+  }
+
+  templateChildren({ children }) {
+    if (t.Function.is(children)) {
+      return children(this.onAccept);
+    }
+    return children;
+  }
+
   render() {
-    return this.hasAcceptedCookies() ? null : this.getBanner();
+    const { hasAcceptedCookies, children, bannerContentProps } = this.getLocals();
+
+    if (hasAcceptedCookies) {
+      return null;
+    }
+
+    return children ?
+      this.templateChildren({ children }) :
+      <BannerContent {...bannerContentProps} />;
   }
 
   componentWillReceiveProps(nextProps) {
