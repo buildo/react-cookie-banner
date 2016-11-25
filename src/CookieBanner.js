@@ -130,12 +130,16 @@ export default class CookieBanner extends React.Component {
 
   getLocals() {
     const {
-      message, onAccept, link, buttonMessage, closeIcon,
-      disableStyle, styles, className, children, ...props
-    } = this.props;
+      onAccept,
+      props: {
+        message, link, buttonMessage, closeIcon,
+        disableStyle, styles, className, children, ...props
+      }
+    } = this;
 
     return {
       children,
+      onAccept,
       hasAcceptedCookies: this.hasAcceptedCookies(),
       bannerContentProps: {
         ...omit(props, Object.keys(Props)),
@@ -145,22 +149,22 @@ export default class CookieBanner extends React.Component {
     };
   }
 
-  templateChildren({ children }) {
+  templateChildren({ children, onAccept }) {
     if (t.Function.is(children)) {
-      return children(this.onAccept);
+      return children(onAccept);
     }
     return children;
   }
 
   render() {
-    const { hasAcceptedCookies, children, bannerContentProps } = this.getLocals();
+    const { hasAcceptedCookies, children, bannerContentProps, onAccept } = this.getLocals();
 
     if (hasAcceptedCookies) {
       return null;
     }
 
     return children ?
-      this.templateChildren({ children }) :
+      this.templateChildren({ children, onAccept }) :
       <BannerContent {...bannerContentProps} />;
   }
 
