@@ -1,4 +1,5 @@
 import React from 'react';
+import omit from 'lodash.omit';
 import cx from 'classnames';
 import { t, props } from 'tcomb-react';
 import styleUtils from './styleUtils';
@@ -76,7 +77,7 @@ export default class BannerContent extends React.Component {
       message,
       cookieMessageStyle: getStyle('message'),
       wrapperProps: {
-        ...wrapperProps,
+        ...omit(wrapperProps, Object.keys(Props)),
         className: cx('react-cookie-banner', className),
         style: getStyle('banner')
       },
