@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import CookieBanner, { BannerContent, cookie } from '../src';
 
 cookie('accepts-cookies', '');
@@ -70,4 +69,4 @@ class Example extends React.Component {
 
 }
 
-ReactDOM.render(<Example />, document.getElementById('container'));
+React.render(<Example />, document.getElementById('container'));
