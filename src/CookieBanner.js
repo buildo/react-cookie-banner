@@ -64,7 +64,7 @@ export default class CookieBanner extends React.Component {
     const _props = props || this.props;
     if (!this.state.listeningScroll && !this.hasAcceptedCookies() && _props.dismissOnScroll) {
       if (window.attachEvent) {
-        //Internet Explorer
+        // Internet Explorer
         window.attachEvent('onscroll', this.onScroll);
       } else if (window.addEventListener) {
         window.addEventListener('scroll', this.onScroll, false);
@@ -76,7 +76,7 @@ export default class CookieBanner extends React.Component {
   removeOnScrollListener = () => {
     if (this.state.listeningScroll) {
       if (window.detachEvent) {
-        //Internet Explorer
+        // Internet Explorer
         window.detachEvent('onscroll', this.onScroll);
       } else if (window.removeEventListener) {
         window.removeEventListener('scroll', this.onScroll, false);
