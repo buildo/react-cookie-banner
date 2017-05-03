@@ -2,7 +2,12 @@
   "name": "react-cookie-banner",
   "version": "0.0.17",
   "description": "",
-  "main": "index.js",
+  "main": "lib",
+  "files": [
+    "lib",
+    "src",
+    "examples"
+  ],
   "scripts": {
     "test": "./node_modules/karma/bin/karma start",
     "build": "rm -rf lib && mkdir lib && babel --loose --stage 0 --out-dir lib src",
