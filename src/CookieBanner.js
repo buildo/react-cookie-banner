@@ -21,6 +21,7 @@ const Props = {
       hours: t.maybe(t.Number)
     })
   ])),
+  cookiePath: t.maybe(t.String),
   dismissOnScroll: t.maybe(t.Boolean),
   dismissOnScrollThreshold: t.maybe(t.Number)
 };
@@ -34,6 +35,7 @@ const Props = {
  * @param buttonMessage - message written inside the button of the default cookie banner
  * @param cookie - cookie-key used to save user's decision about you cookie-policy
  * @param cookieExpiration - used to set the cookie expiration
+ * @param cookiePath - used to set the cookie path
  * @param dismissOnScroll - whether the cookie banner should be dismissed on scroll or not
  * @param dismissOnScrollThreshold -
  *   amount of pixel the user need to scroll to dismiss the cookie banner
@@ -112,9 +114,9 @@ export default class CookieBanner extends React.Component {
   }
 
   onAccept = () => {
-    const { cookie, cookieExpiration, onAccept } = this.props;
+    const { cookie, cookieExpiration, cookiePath, onAccept } = this.props;
 
-    cookieLite(cookie, true, this.getSecondsSinceExpiration(cookieExpiration));
+    cookieLite(cookie, true, this.getSecondsSinceExpiration(cookieExpiration), cookiePath);
     onAccept({ cookie });
 
     if (this.state.listeningScroll) {
