@@ -12,7 +12,8 @@
     "build-examples": "npm run clean && webpack --config examples/webpack.config.build.js --progress",
     "start": "webpack-dev-server --config examples/webpack.config.js --progress --hot --inline",
     "clean": "rm -f examples/bundle.js examples/bundle.js.map",
-    "generate-readme": "node ./generateReadme.js"
+    "generate-readme": "node ./generateReadme.js",
+    "release-version": "smooth-release"
   },
   "repository": {
     "type": "git",
@@ -59,6 +60,7 @@
     "react": "^0.13.3",
     "react-readme-generator": "0.0.1",
     "require-dir": "^0.3.0",
+    "smooth-release": "^8.0.3",
     "webpack": "^1.9.10",
     "webpack-dev-server": "^1.9.0"
   },
