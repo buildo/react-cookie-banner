@@ -1,3 +1,5 @@
+// import CookieBanner, { cookie } from 'react-cookie-banner;
+
 class Example extends React.Component {
 
   constructor(props) {
