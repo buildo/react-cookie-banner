@@ -98,7 +98,7 @@ describe('CookieBanner', () => {
 
     class MyComponent extends React.Component {
       render() {
-        return <div className='my-component'/>;
+        return <div className='my-component' />;
       }
     }
 
@@ -129,7 +129,7 @@ describe('CookieBanner', () => {
 
     class MyOtherComponent extends React.Component {
       render() {
-        return <div className='my-other-component' onClick={this.props.onAccept}/>;
+        return <div className='my-other-component' onClick={this.props.onAccept} />;
       }
     }
 
