@@ -9,10 +9,9 @@
     "examples"
   ],
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start",
-    "build": "rm -rf lib && mkdir lib && babel --loose --stage 0 --out-dir lib src",
-    "lint": "eslint src test",
-    "preversion": "npm run lint && npm run test && npm run build-examples",
+    "test": "jest",
+    "build": "rm -rf lib && mkdir lib && tsc",
+    "preversion": "npm test && npm run build-examples",
     "prepublish": "npm run build",
     "build-examples": "npm run clean && webpack --config examples/webpack.config.build.js --progress",
     "start": "webpack-dev-server --config examples/webpack.config.js --progress --hot --inline",
@@ -22,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:buildo/react-cookie-banner"
+    "url": "https://github.com/buildo/react-cookie-banner.git"
   },
   "keywords": [
     "react",
@@ -40,10 +39,12 @@
   },
   "homepage": "https://github.com/buildo/react-cookie-banner",
   "dependencies": {
+    "@types/classnames": "2.2.3",
+    "@types/prop-types": "15.5.2",
+    "@types/react": "16.0.25",
     "browser-cookie-lite": "1.0.4",
-    "classnames": "^2.1.5",
-    "lodash.omit": "^3.1.0",
-    "tcomb-react": "^0.9.3"
+    "classnames": "2.2.3",
+    "lodash.omit": "^3.1.0"
   },
   "devDependencies": {
     "babel": "^5.8.12",
@@ -52,24 +53,31 @@
     "eslint": "^3.7.1",
     "eslint-config-buildo": "buildo/eslint-config",
     "eslint-loader": "^1.1.1",
-    "expect": "^1.6.0",
-    "isparta-loader": "^0.2.0",
-    "karma": "^0.13.15",
-    "karma-bamboo-reporter": "^0.1.0",
-    "karma-chrome-launcher": "^0.2.0",
-    "karma-coverage": "^0.5.3",
-    "karma-mocha": "^0.2.0",
-    "karma-webpack": "^1.7.0",
-    "mocha": "^2.2.5",
+    "jest": "^21.2.1",
     "object-assign": "^4.0.1",
-    "react": "^0.13.3",
+    "prop-types": "^15.6.0",
+    "react": "16",
+    "react-dom": "16",
     "react-readme-generator": "0.0.1",
     "require-dir": "^0.3.0",
     "smooth-release": "^8.0.3",
+    "ts-jest": "^21.2.3",
+    "typescript": "^2.6.2",
     "webpack": "^1.9.10",
     "webpack-dev-server": "^1.9.0"
   },
   "peerDependencies": {
     "react": ">= 0.12.x"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(.*[.](test))[.](tsx?)$",
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "tsx"
+    ]
   }
 }
