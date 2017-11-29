@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import omit from 'lodash.omit';
+import * as omit from 'lodash.omit';
 import { cookie as cookieLite } from 'browser-cookie-lite';
 import BannerContent, { propTypes as BannerContentPropTypes, Props as BannerContentProps } from './BannerContent';
 
@@ -152,12 +152,8 @@ export default class CookieBanner extends React.Component<CookieBanner.Props, St
     }
   }
 
-  hasAcceptedCookies = () => {
+  hasAcceptedCookies() {
     return (typeof window !== 'undefined') && cookieLite(this.props.cookie);
-  }
-
-  getLocals() {
-
   }
 
   templateChildren(children: CookieBanner.Props['children'], onAccept: CookieBannerDefaultProps['onAccept']) {

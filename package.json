@@ -11,12 +11,9 @@
   "scripts": {
     "test": "jest",
     "build": "rm -rf lib && mkdir lib && tsc",
-    "preversion": "npm test && npm run build-examples",
+    "preversion": "npm run test",
     "prepublish": "npm run build",
-    "build-examples": "npm run clean && webpack --config examples/webpack.config.build.js --progress",
-    "start": "webpack-dev-server --config examples/webpack.config.js --progress --hot --inline",
-    "clean": "rm -f examples/bundle.js examples/bundle.js.map",
-    "generate-readme": "node ./generateReadme.js",
+    "start": "styleguidist server",
     "release-version": "smooth-release"
   },
   "repository": {
@@ -47,24 +44,25 @@
     "lodash.omit": "^3.1.0"
   },
   "devDependencies": {
-    "babel": "^5.8.12",
-    "babel-eslint": "^7.0.0",
-    "babel-loader": "^5.3.2",
-    "eslint": "^3.7.1",
-    "eslint-config-buildo": "buildo/eslint-config",
-    "eslint-loader": "^1.1.1",
+    "babel-loader": "^7.1.2",
+    "babel-preset-buildo": "^0.1.1",
+    "css-loader": "^0.28.5",
+    "file-loader": "^1.1.5",
     "jest": "^21.2.1",
-    "object-assign": "^4.0.1",
-    "prop-types": "^15.6.0",
-    "react": "16",
-    "react-dom": "16",
-    "react-readme-generator": "0.0.1",
-    "require-dir": "^0.3.0",
-    "smooth-release": "^8.0.3",
+    "node-sass": "4.5.2",
+    "progress-bar-webpack-plugin": "^1.10.0",
+    "raw-loader": "^0.5.1",
+    "react": "^16",
+    "react-docgen-typescript": "^1.1.0",
+    "react-dom": "^16",
+    "react-styleguidist": "^6.0.33",
+    "react-test-renderer": "^16.2.0",
+    "sass-loader": "^6.0.6",
+    "smooth-release": "^8.0.4",
     "ts-jest": "^21.2.3",
-    "typescript": "^2.6.2",
-    "webpack": "^1.9.10",
-    "webpack-dev-server": "^1.9.0"
+    "ts-loader": "^2.3.3",
+    "typescript": "^2.4.2",
+    "webpack": "3.5.5"
   },
   "peerDependencies": {
     "react": ">= 0.12.x"
