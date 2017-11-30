@@ -14,6 +14,7 @@
     "preversion": "npm run test",
     "prepublish": "npm run build",
     "start": "styleguidist server",
+    "typecheck": "tsc --noEmit",
     "release-version": "smooth-release"
   },
   "repository": {
@@ -44,6 +45,7 @@
     "lodash.omit": "^3.1.0"
   },
   "devDependencies": {
+    "@types/jest": "^21.1.8",
     "babel-loader": "^7.1.2",
     "babel-preset-buildo": "^0.1.1",
     "css-loader": "^0.28.5",
