@@ -86,7 +86,7 @@ export default class BannerContent extends React.Component<Props> {
 
     const cookieMessageStyle = getStyle('message');
     const wrapperProps = {
-      ...omit(_wrapperProps, propTypes),
+      ...omit(_wrapperProps, Object.keys(propTypes)),
       className: cx('react-cookie-banner', className),
       style: getStyle('banner')
     };

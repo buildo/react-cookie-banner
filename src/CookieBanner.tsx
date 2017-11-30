@@ -120,7 +120,7 @@ export default class CookieBanner extends React.Component<CookieBanner.Props, St
     }
   }
 
-  getSecondsSinceExpiration = (cookieExpiration: CookieBannerDefaultProps['cookieExpiration']) => {
+  getSecondsSinceExpiration = (cookieExpiration: CookieBannerRequiredProps['cookieExpiration']) => {
     if (typeof cookieExpiration === 'number') {
       return cookieExpiration;
     }
@@ -174,7 +174,7 @@ export default class CookieBanner extends React.Component<CookieBanner.Props, St
 
     const hasAcceptedCookies = this.hasAcceptedCookies();
     const bannerContentProps = {
-      ...omit(props, CookieBanner.propTypes),
+      ...omit(props, Object.keys(CookieBanner.propTypes)),
       message, onAccept, link, buttonMessage,
       closeIcon, disableStyle, styles, className
     };
