@@ -50,6 +50,6 @@ const styles = {
   }
 };
 
-const getStyle = (style) => styles[style];
+const getStyle = (style: 'message' | 'banner' | 'link' | 'button' | 'icon') => styles[style];
 
-export default { getStyle };
+export { getStyle };

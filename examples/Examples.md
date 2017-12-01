@@ -1,29 +1,32 @@
-// import CookieBanner, { cookie } from 'react-cookie-banner;
+### Examples
 
-class Example extends React.Component {
+```js
+class Component extends React.Component {
 
   constructor(props) {
     super(props);
     cookie('accepts-cookies', '');
+    this.state = { dismissOnScroll: true }
+
+    this.resetCookies = this.resetCookies.bind(this);
+    this.onAccept = this.onAccept.bind(this);
+    this.toggleDismissOnScroll = this.toggleDismissOnScroll.bind(this);
   }
 
-  state = {
-    dismissOnScroll: true
-  }
-
-  resetCookies = () => {
+  resetCookies() {
     cookie('accepts-cookies', '');
     this.forceUpdate();
   }
 
-  toggleDismissOnScroll = () => {
+  onAccept() {
+    this.forceUpdate();
+  }
+
+  toggleDismissOnScroll() {
     this.setState({ dismissOnScroll: !this.state.dismissOnScroll });
   }
 
-  onAccept = () => this.forceUpdate()
-
   render() {
-
     return (
       <div>
         <div style={{ position: 'fixed', bottom: 0, left: 0, width: '100%', zIndex: 999 }}>
@@ -32,7 +35,7 @@ class Example extends React.Component {
               banner: {
                 fontFamily: 'Source Sans Pro',
                 height: 57,
-                background: 'rgba(52, 64, 81, 0.88) url(https://rawgit.com/buildo/react-cookie-banner/master/examples/cookie.png) 20px 50% no-repeat',
+                background: 'rgba(52, 64, 81, 0.88) url(/cookie.png) 20px 50% no-repeat',
                 backgroundSize: '30px 30px',
                 backgroundColor: '',
                 fontSize: '15px',
@@ -65,7 +68,7 @@ class Example extends React.Component {
                 fontWeight: 'bold'
               }
             }}
-            message='Buildo uses cookies to guarantee users the employment of its site features, offering a better purchasing experience. By continuing to browse the site you&quot;re agreeing to our use of cookies.'
+            message="Buildo uses cookies to guarantee users the employment of its site features, offering a better purchasing experience. By continuing to browse the site you're agreeing to our use of cookies."
             link={{ msg: 'More information on our use of cookies', url: 'http://nocookielaw.com/' }}
             buttonMessage='Close'
             dismissOnScroll={this.state.dismissOnScroll}
@@ -73,12 +76,21 @@ class Example extends React.Component {
           />
         </div>
         <div>
-          <p>accepts-cookies: {cookie('accepts-cookies') ? 'true' : 'false'}</p>
-          <Button size='small' onClick={this.toggleDismissOnScroll}>{`${this.state.dismissOnScroll ? 'Disable' : 'Activate'} dismissOnScroll`}</Button>
-          <Button size='small' onClick={this.resetCookies} style={{ marginLeft: 20 }}>Reset Cookies</Button>
+          <p>
+            accepts-cookies: {cookie('accepts-cookies') ? 'true' : 'false'}
+          </p>
+          <button size='small' onClick={this.toggleDismissOnScroll}>
+            {`${this.state.dismissOnScroll ? 'Disable' : 'Activate'} dismissOnScroll`}
+          </button>
+          <button size='small' onClick={this.resetCookies} style={{ marginLeft: 20 }}>
+            Reset Cookies
+          </button>
         </div>
       </div>
     );
   }
 
 }
+
+<Component />
+```
