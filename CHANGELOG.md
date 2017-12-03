@@ -2,6 +2,14 @@
 
 
 
+## [v1.0.0](https://github.com/buildo/react-cookie-banner/tree/v1.0.0) (2017-12-03)
+[Full Changelog](https://github.com/buildo/react-cookie-banner/compare/v0.0.18...v1.0.0)
+
+#### New features:
+
+- #37: Refactor in TypeScript! (closes #37) [#38](https://github.com/buildo/react-cookie-banner/pull/38)
+- Adding import to react-components showroom example [#36](https://github.com/buildo/react-cookie-banner/pull/36)
+
 ## [v0.0.18](https://github.com/buildo/react-cookie-banner/tree/v0.0.18) (2017-05-03)
 [Full Changelog](https://github.com/buildo/react-cookie-banner/compare/v0.0.17...v0.0.18)
 

@@ -1,6 +1,6 @@
 {
   "name": "react-cookie-banner",
-  "version": "0.0.18",
+  "version": "1.0.0",
   "description": "",
   "main": "lib",
   "files": [
@@ -73,7 +73,9 @@
     "react": ">= 0.12.x"
   },
   "jest": {
-    "setupFiles": ["<rootDir>/test/setup.js"],
+    "setupFiles": [
+      "<rootDir>/test/setup.js"
+    ],
     "transform": {
       "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
