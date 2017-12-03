@@ -20,9 +20,7 @@ React.renderComponent(
 );
 ```
 
-[Live Demo](https://rawgit.com/buildo/react-cookie-banner/master/examples/index.html)
-
-[More Examples](https://github.com/buildo/react-cookie-banner/tree/master/examples)
+[Live Examples](http://react-components.buildo.io/#cookiebanner)
 
 ### Install
 ```
@@ -41,7 +39,7 @@ ReactCookieBanner by default uses its simple inline style. However you can easil
 
 In this case you can style it using css classes. The banner is structured as follows:
 
-```html
+```jsx
 <div className={this.props.className + ' react-cookie-banner'}
   <span className='cookie-message'>
     {this.props.message}
