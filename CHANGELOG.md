@@ -2,6 +2,13 @@
 
 
 
+## [v1.0.1](https://github.com/buildo/react-cookie-banner/tree/v1.0.1) (2017-12-04)
+[Full Changelog](https://github.com/buildo/react-cookie-banner/compare/v1.0.0...v1.0.1)
+
+#### New features:
+
+- #39: import in v1.0.0 is broken (closes #39) [#40](https://github.com/buildo/react-cookie-banner/pull/40)
+
 ## [v1.0.0](https://github.com/buildo/react-cookie-banner/tree/v1.0.0) (2017-12-03)
 [Full Changelog](https://github.com/buildo/react-cookie-banner/compare/v0.0.18...v1.0.0)
 
