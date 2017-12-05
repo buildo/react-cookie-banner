@@ -47,6 +47,7 @@
   "devDependencies": {
     "@types/enzyme": "2.8.6",
     "@types/jest": "^21.1.8",
+    "@types/node": "8.0.54",
     "babel-loader": "^7.1.2",
     "babel-preset-buildo": "^0.1.1",
     "css-loader": "^0.28.5",

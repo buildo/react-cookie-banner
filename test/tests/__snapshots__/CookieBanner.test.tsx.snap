@@ -72,3 +72,16 @@ ShallowWrapper {
   },
 }
 `;
+
+exports[`build build script generates every needed file 1`] = `
+Array [
+  "BannerContent.d.ts",
+  "BannerContent.js",
+  "CookieBanner.d.ts",
+  "CookieBanner.js",
+  "index.d.ts",
+  "index.js",
+  "styleUtils.d.ts",
+  "styleUtils.js",
+]
+`;
