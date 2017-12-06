@@ -1,7 +1,7 @@
 {
   "name": "react-cookie-banner",
   "version": "1.0.1",
-  "description": "",
+  "description": "React Cookie banner which can be automatically dismissed with a scroll. Because fuck The Cookie Law, that's why.",
   "main": "lib",
   "files": [
     "lib",
