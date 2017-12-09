@@ -1,6 +1,10 @@
 
 const styles = {
   icon: {
+    background: 'none',
+    border: 'none',
+    boxShadow: 'none',
+    padding: '0',
     position: 'absolute',
     fontSize: '1em',
     top: '50%',
@@ -20,15 +24,15 @@ const styles = {
     position: 'absolute',
     top: '50%',
     right: '35px',
-    height: '24px',
     lineHeight: '24px',
     marginTop: '-12px',
-    paddingLeft: '8px',
-    paddingRight: '8px',
+    padding: '0 8px',
     opacity: '0.5',
     backgroundColor: 'white',
+    border: 'none',
     borderRadius: '3px',
-    fontSize: '14px',
+    boxShadow: 'none',
+    fontSize: '12px',
     fontWeight: '500',
     color: '#242424',
     cursor: 'pointer'
