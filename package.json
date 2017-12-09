@@ -41,6 +41,7 @@
   "homepage": "https://github.com/buildo/react-cookie-banner",
   "dependencies": {
     "@types/classnames": "2.2.3",
+    "@types/lodash.omit": "4.5.3",
     "@types/prop-types": "15.5.2",
     "@types/react": "16.0.25",
     "classnames": "2.2.3",
