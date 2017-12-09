@@ -14,6 +14,7 @@ export type Props = {
     msg?: string,
     url: string,
     target?: '_blank' | '_self' | '_parent' | '_top' | 'framename'
+    rel: string,
   },
   /** message written inside the button of the default cookie banner */
   buttonMessage?: string,
@@ -71,9 +72,9 @@ export default class BannerContent extends React.Component<Props> {
 
   templateLink = (style: React.CSSProperties, link?: Props['link']) => {
     if (link) {
-      const { url: href, target, msg } = link;
+      const { url: href, target, rel, msg } = link;
       return (
-        <a className='cookie-link' {...{ href, target, style }}>
+        <a className='cookie-link' {...{ href, target, style, rel }}>
           {msg || 'Learn more'}
         </a>
       );

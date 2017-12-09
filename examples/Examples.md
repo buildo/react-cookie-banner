@@ -69,7 +69,7 @@ class Component extends React.Component {
               }
             }}
             message="Buildo uses cookies to guarantee users the employment of its site features, offering a better purchasing experience. By continuing to browse the site you're agreeing to our use of cookies."
-            link={{ msg: 'More information on our use of cookies', url: 'http://nocookielaw.com/' }}
+            link={{ msg: 'More information on our use of cookies', url: 'http://nocookielaw.com/', rel: 'noopener noreferrer' }}
             buttonMessage='Close'
             dismissOnScroll={this.state.dismissOnScroll}
             onAccept={this.onAccept}
