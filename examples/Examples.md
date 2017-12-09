@@ -96,16 +96,14 @@ class Component extends React.Component {
 ```
 
 #### Server side rendering
-You can pass your own `cookies` instance to support SSR:
+You can pass your own `cookies` instance to `CookiesProvider` to support SSR:
 
 ```js
-// import { Cookies } from 'react-cookie-banner';
+// import { Cookies, CookieBannerUniversal } from 'react-cookie-banner';
 
 const cookies = new Cookies(/* Your cookie header, on browser defaults to document.cookie */);
 
-cookies.set('foo', 'bar');
-
-<div>
-  "foo": "{cookies.get('foo')}"
-</div>
+<CookiesProvider cookies={cookies}>
+  <CookieBannerUniversal />
+</CookiesProvider>
 ```
