@@ -79,7 +79,7 @@ export class CookieBanner extends React.Component<CookieBanner.Props, State> {
   static defaultProps = {
     onAccept: () => {},
     dismissOnScroll: true,
-    cookies: new Cookies,
+    cookies: new Cookies(),
     cookie: 'accepts-cookies',
     cookieExpiration: { years: 1 },
     buttonMessage: 'Got it',
