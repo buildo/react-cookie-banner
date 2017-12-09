@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import * as omit from 'lodash.omit';
-import { withCookies, Cookies } from 'react-cookie';
+import { Cookies } from 'react-cookie';
 import BannerContent, { propTypes as BannerContentPropTypes, Props as BannerContentProps } from './BannerContent';
 
 export type CookieBannerRequiredProps = {
@@ -9,7 +9,7 @@ export type CookieBannerRequiredProps = {
   children?: any,
   /** called when user accepts cookies */
   onAccept?: (o: { cookie: string }) => void,
-  /** instance of Cookies object to be used in server-side-rendering */
+  /** instance of Cookies class to be used in server-side-rendering */
   cookies?: Cookies,
   /** cookie-key used to save user's decision about you cookie-policy */
   cookie?: string,
@@ -38,8 +38,10 @@ export type CookieBannerDefaultProps = {
   styles: object
 }
 
+export type CookieBannerProps = BannerContentProps & CookieBannerRequiredProps & Partial<CookieBannerDefaultProps>;
+
 export namespace CookieBanner {
-  export type Props = BannerContentProps & CookieBannerRequiredProps & Partial<CookieBannerDefaultProps>;
+  export type Props = CookieBannerProps;
 }
 
 type CookieBannerDefaultedProps = CookieBannerRequiredProps & CookieBannerDefaultProps;
@@ -51,8 +53,7 @@ export type State = {
 /**
  * React Cookie banner dismissable with just a scroll!
  */
-
-export class CookieBanner extends React.Component<CookieBanner.Props, State> {
+export default class CookieBanner extends React.Component<CookieBanner.Props, State> {
 
   static propTypes = {
     ...BannerContentPropTypes,
@@ -212,5 +213,3 @@ export class CookieBanner extends React.Component<CookieBanner.Props, State> {
   }
 
 }
-
-export default withCookies<CookieBanner.Props>(CookieBanner);
