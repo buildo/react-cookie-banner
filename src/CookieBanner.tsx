@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import * as omit from 'lodash.omit';
-import { cookie as cookieLite } from 'browser-cookie-lite';
+import { withCookies, Cookies } from 'react-cookie';
 import BannerContent, { propTypes as BannerContentPropTypes, Props as BannerContentProps } from './BannerContent';
 
 export type CookieBannerRequiredProps = {
@@ -9,6 +9,8 @@ export type CookieBannerRequiredProps = {
   children?: any,
   /** called when user accepts cookies */
   onAccept?: (o: { cookie: string }) => void,
+  /** instance of Cookies object to be used in server-side-rendering */
+  cookies?: Cookies,
   /** cookie-key used to save user's decision about you cookie-policy */
   cookie?: string,
   /** used to set the cookie expiration */
@@ -28,6 +30,7 @@ export type CookieBannerRequiredProps = {
 export type CookieBannerDefaultProps = {
   onAccept: () => void,
   dismissOnScroll: boolean,
+  cookies: Cookies,
   cookie: string,
   cookieExpiration: { years: number },
   buttonMessage: string,
@@ -48,7 +51,8 @@ export type State = {
 /**
  * React Cookie banner dismissable with just a scroll!
  */
-export default class CookieBanner extends React.Component<CookieBanner.Props, State> {
+
+export class CookieBanner extends React.Component<CookieBanner.Props, State> {
 
   static propTypes = {
     ...BannerContentPropTypes,
@@ -57,6 +61,7 @@ export default class CookieBanner extends React.Component<CookieBanner.Props, St
       PropTypes.func
     ]),
     onAccept: PropTypes.func,
+    cookies: PropTypes.instanceOf(Cookies),
     cookie: PropTypes.string,
     cookieExpiration: PropTypes.oneOfType([
       PropTypes.number,
@@ -74,6 +79,7 @@ export default class CookieBanner extends React.Component<CookieBanner.Props, St
   static defaultProps = {
     onAccept: () => {},
     dismissOnScroll: true,
+    cookies: new Cookies,
     cookie: 'accepts-cookies',
     cookieExpiration: { years: 1 },
     buttonMessage: 'Got it',
@@ -140,9 +146,13 @@ export default class CookieBanner extends React.Component<CookieBanner.Props, St
   }
 
   onAccept = () => {
-    const { cookie, cookieExpiration, cookiePath, onAccept } = this.props as CookieBannerDefaultedProps;
+    const { cookies, cookie, cookieExpiration, cookiePath: path, onAccept } = this.props as CookieBannerDefaultedProps;
 
-    cookieLite(cookie, true, this.getSecondsSinceExpiration(cookieExpiration), cookiePath);
+    cookies.set(cookie, true, {
+      path,
+      expires: new Date(Date.now() + (this.getSecondsSinceExpiration(cookieExpiration) * 1000))
+    });
+
     onAccept({ cookie });
 
     if (this.state.listeningScroll) {
@@ -153,7 +163,8 @@ export default class CookieBanner extends React.Component<CookieBanner.Props, St
   }
 
   hasAcceptedCookies() {
-    return (typeof window !== 'undefined') && cookieLite(this.props.cookie);
+    const { cookies, cookie } = this.props as CookieBannerDefaultedProps;
+    return cookies.get(cookie);
   }
 
   templateChildren(children: CookieBanner.Props['children'], onAccept: CookieBannerDefaultProps['onAccept']) {
@@ -201,3 +212,5 @@ export default class CookieBanner extends React.Component<CookieBanner.Props, St
   }
 
 }
+
+export default withCookies(CookieBanner);
