@@ -213,4 +213,4 @@ export class CookieBanner extends React.Component<CookieBanner.Props, State> {
 
 }
 
-export default withCookies(CookieBanner);
+export default withCookies<CookieBanner.Props>(CookieBanner);

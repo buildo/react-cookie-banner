@@ -7,7 +7,7 @@ declare module 'react-cookie' {
 
   export class CookiesProvider extends Component<{},{}>{}
 
-  export function withCookies(Component: ComponentClass): ComponentClass;
+  export function withCookies<T>(Component: ComponentClass): ComponentClass<T>;
 
   export interface ReactCookieGetOptions{
     doNotParse?: boolean;
