@@ -5,7 +5,7 @@ class Component extends React.Component {
 
   constructor(props) {
     super(props);
-    cookie('accepts-cookies', '');
+    cookies.set('accepts-cookies', '');
     this.state = { dismissOnScroll: true }
 
     this.resetCookies = this.resetCookies.bind(this);
@@ -14,7 +14,7 @@ class Component extends React.Component {
   }
 
   resetCookies() {
-    cookie('accepts-cookies', '');
+    cookies.set('accepts-cookies', '');
     this.forceUpdate();
   }
 
@@ -77,7 +77,7 @@ class Component extends React.Component {
         </div>
         <div>
           <p>
-            accepts-cookies: {cookie('accepts-cookies') ? 'true' : 'false'}
+            accepts-cookies: {cookies.get('accepts-cookies') ? 'true' : 'false'}
           </p>
           <button size='small' onClick={this.toggleDismissOnScroll}>
             {`${this.state.dismissOnScroll ? 'Disable' : 'Activate'} dismissOnScroll`}
@@ -93,4 +93,19 @@ class Component extends React.Component {
 }
 
 <Component />
+```
+
+#### Server side rendering
+You can pass your own `cookies` instance to support SSR:
+
+```js
+// import { Cookies } from 'react-cookie-banner';
+
+const cookies = new Cookies(/* Your cookie header, on browser defaults to document.cookie */);
+
+cookies.set('foo', 'bar');
+
+<div>
+  "foo": "{cookies.get('foo')}"
+</div>
 ```
