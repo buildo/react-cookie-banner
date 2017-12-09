@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import * as omit from 'lodash.omit';
+import omit = require('lodash.omit');
 import { Cookies } from 'react-cookie';
 import BannerContent, { propTypes as BannerContentPropTypes, Props as BannerContentProps } from './BannerContent';
 

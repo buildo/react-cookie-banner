@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import * as omit from 'lodash.omit';
+import omit = require('lodash.omit');
 import * as cx from 'classnames';
 import * as styleUtils from './styleUtils';
 
