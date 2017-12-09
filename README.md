@@ -76,21 +76,43 @@ Or you override the predefined inline-styles. This examples puts the message fon
 See `src/styleUtils.js` for which style objects are availble to be overridden.
 
 ### Cookie manipulation
-ReactCookieBanner uses and exports the library **`browser-cookie-lite`**
+react-cookie-banner uses **`universal-cookie`** to manipulate cookies.
 
-You can import and use it as follows:
+You can import the `Cookies` class and use it as follows:
 
 ```js
-import {cookie} from 'react-cookie-banner';
+import { Cookies } from 'react-cookie-banner';
+
+const cookies = new Cookies(/* Your cookie header, on browser defaults to document.cookie */);
 
 // simple set
-cookie("test", "a")
+cookie.set('test', 'a')
 // complex set - cookie(name, value, ttl, path, domain, secure)
-cookie("test", "a", 60*60*24, "/api", "*.example.com", true)
+cookie.set('test', 'a', {
+  expires: new Date(2020-05-04)
+  path: '/api',
+  domain: '*.example.com',
+  secure: true
+})
 // get
-cookie("test")
+cookies.get("test")
 // destroy
-cookie("test", "", -1)
+cookies.remove("test", "", -1)
 ```
 
-Please refer to [browser-cookie-lite](https://github.com/litejs/browser-cookie-lite) repo for more documentation.
+Please refer to [universal-cookie](https://github.com/reactivestack/cookies/tree/master/packages/universal-cookie#api---cookies-class) repo for more documentation.
+
+### Server side rendering (universal)
+react-cookie-banner supports SSR thanks to `react-cookie`.
+If you want to support SSR, you should use the `CookieProvider` from `react-cookie` and the  `CookieBannerUniversal` wrapper:
+
+```js
+import { Cookies, CookiesProvider, CookieBannerUniversal } from 'react-cookie-banner';
+
+const cookies = new Cookies(/* Your cookie header, on browser defaults to document.cookie */);
+
+<CookiesProvider cookies={cookies}>
+  <CookieBannerUniversal />
+</CookiesProvider>
+```
+

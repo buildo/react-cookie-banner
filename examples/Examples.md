@@ -99,7 +99,7 @@ class Component extends React.Component {
 You can pass your own `cookies` instance to `CookiesProvider` to support SSR:
 
 ```js
-// import { Cookies, CookieBannerUniversal } from 'react-cookie-banner';
+// import { Cookies, CookiesProvider, CookieBannerUniversal } from 'react-cookie-banner';
 
 const cookies = new Cookies(/* Your cookie header, on browser defaults to document.cookie */);
 
