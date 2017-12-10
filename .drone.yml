@@ -1,10 +1,13 @@
 build:
   test:
     image: node:8
+    environment:
+      - NPM_CONFIG_CACHE=/drone/.npm
+      - NPM_CONFIG_LOGLEVEL=warn
     commands:
-      - yarn --no-lockfile
-      - yarn typecheck
-      - yarn test
+      - npm i
+      - npm run typecheck
+      - npm test
 
 cache:
   mount:
