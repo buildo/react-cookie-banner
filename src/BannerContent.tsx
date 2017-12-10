@@ -14,7 +14,7 @@ export type Props = {
     msg?: string,
     url: string,
     target?: '_blank' | '_self' | '_parent' | '_top' | 'framename',
-    rel?: string,
+    rel?: string
   },
   /** message written inside the button of the default cookie banner */
   buttonMessage?: string,
