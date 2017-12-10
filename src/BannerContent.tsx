@@ -13,7 +13,7 @@ export type Props = {
   link?: {
     msg?: string,
     url: string,
-    target?: '_blank' | '_self' | '_parent' | '_top' | 'framename'
+    target?: '_blank' | '_self' | '_parent' | '_top' | 'framename',
     rel: string,
   },
   /** message written inside the button of the default cookie banner */
