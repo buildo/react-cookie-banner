@@ -41,11 +41,12 @@
   "homepage": "https://github.com/buildo/react-cookie-banner",
   "dependencies": {
     "@types/classnames": "2.2.3",
+    "@types/lodash.omit": "4.5.3",
     "@types/prop-types": "15.5.2",
     "@types/react": "16.0.25",
-    "browser-cookie-lite": "1.0.4",
     "classnames": "2.2.3",
-    "lodash.omit": "^3.1.0"
+    "lodash.omit": "^4.5.0",
+    "react-cookie": "^2.1.2"
   },
   "devDependencies": {
     "@types/enzyme": "2.8.6",

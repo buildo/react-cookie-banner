@@ -12,6 +12,13 @@ ShallowWrapper {
         "years": 1,
       }
     }
+    cookies={
+      Cookies {
+        "HAS_DOCUMENT_COOKIE": true,
+        "cookies": Object {},
+        "hooks": undefined,
+      }
+    }
     dismissOnScroll={true}
     dismissOnScrollThreshold={0}
     message="cookie message"
@@ -79,6 +86,8 @@ Array [
   "BannerContent.js",
   "CookieBanner.d.ts",
   "CookieBanner.js",
+  "CookieBannerUniversal.d.ts",
+  "CookieBannerUniversal.js",
   "index.d.ts",
   "index.js",
   "styleUtils.d.ts",
