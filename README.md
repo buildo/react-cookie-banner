@@ -2,9 +2,9 @@
 
 # React Cookie Banner
 
-React Cookie banner which can be dismissed with just a scroll. Because fuck The Cookie Law that's why.
+A cookie banner for React that can be dismissed with a simple scroll. Because fuck the Cookie Law that's why.
 
-If you *really* want to annoy your users you can disable this feature (highly discouraged!).
+(If you *really* want to annoy your users you can disable this feature but this is strongly discouraged!).
 
 ```jsx
 import CookieBanner from 'react-cookie-banner';
@@ -12,9 +12,9 @@ import CookieBanner from 'react-cookie-banner';
 React.renderComponent(
   <div>
     <CookieBanner
-      message='Yes, we use cookies. If you don't like it change website, we won't miss you!'
+      message="Yes, we use cookies. If you don't like it change website, we won't miss you!"
       onAccept={() => {}}
-      cookie='user-has-accepted-cookies' />
+      cookie="user-has-accepted-cookies" />
   </div>,
   document.body
 );
@@ -22,46 +22,34 @@ React.renderComponent(
 
 [Live Examples](http://react-components.buildo.io/#cookiebanner)
 
-### Install
+## Install
 ```
 npm install --save react-cookie-banner
 ```
 
-### API
+or using `yarn`:
+
+```
+yarn add react-cookie-banner
+```
+
+## API
 You can see `CookieBanner`'s props in its own [README.md](https://github.com/buildo/react-cookie-banner/blob/master/src/README.md)
 
-### Style
-ReactCookieBanner by default uses its simple inline style. However you can easily disable it by passing
+## Style
+react-cookie-banner comes with a nice default style made using inline-style.
 
-```jsx
-<CookieBanner disableStyle={true} />
-```
+Of course, you can customize it as you like in several ways.
 
-In this case you can style it using css classes. The banner is structured as follows:
+Based on how many changes you want to apply, you can style `react-cookie-banner` as follows:
 
-```jsx
-<div className={this.props.className + ' react-cookie-banner'}
-  <span className='cookie-message'>
-    {this.props.message}
-    <a className='cookie-link'>
-      Learn more
-    </a>
-  </span>
-  <div className='button-close'>
-    Got it
-  </div>
-</div>
-```
+### You like the original style and you wish to make only a few modifications
+Why spending hours on the CSS when you have such a nice default style? :)
 
-You can also pass your own CustomCookieBanner as child component which will be rendered in replacement:
+In this case you can:
 
-```jsx
-<CookieBanner>
-  <CustomCookieBanner {...myCustomProps} /> {/* rendered directly without any <div> wrapper */}
-</CookieBanner>
-```
-
-Or you override the predefined inline-styles. This examples puts the message font back to normal weight and makes the banner slightly transparent:
+#### 1) Override the predefined inline-styles
+In this example we change the message font-size and make the banner slightly transparent with the `styles` prop:
 
 ```jsx
 <CookieBanner
@@ -73,17 +61,73 @@ Or you override the predefined inline-styles. This examples puts the message fon
 />
 ```
 
-See `src/styleUtils.js` for which style objects are availble to be overridden.
+See [`src/styleUtils.ts`](https://github.com/buildo/react-cookie-banner/blob/master/src/styleUtils.ts) for a complete list of overridable style objects.
 
-### Cookie manipulation
+#### 2) Beat it with good old CSS (or SASS)
+
+The banner is structured as follows:
+
+```jsx
+<div className={this.props.className + ' react-cookie-banner'}
+  <span className='cookie-message'>
+    {this.props.message}
+    <a className='cookie-link'>
+      Learn more
+    </a>
+  </span>
+  <button className='button-close'>
+    Got it
+  </button>
+</div>
+```
+
+You can style every part of it using the appropriate `className`:
+
+```sass
+.your-class-name.react-cookie-banner {
+  background-color: rgba(60, 60, 60, 0.8);
+  
+  .cookie-message {
+    font-weight: 400;
+  }
+}
+```
+
+### You need to heavily adapt the style to your application
+Your creative designer wants to change the style of the cookie banner completely?
+Don't worry, we got your covered!
+
+If you need to re-style it, you can:
+
+#### 1) Disable the default style and use your CSS
+
+You may disable the default style by simply setting the prop `disableStyle` to `true`:
+
+```jsx
+<CookieBanner disableStyle={true} />
+```
+
+Now you can re-style the cookie banner completely using your own CSS.
+
+#### 2) Use your own cookie banner!
+Don't lke the layout either?
+You can use your own custom cookie banner component by passing it as `children` and still let `react-cookie-banner` handle the hassle of managing `cookies` for you :)
+
+```jsx
+<CookieBanner>
+  <MyCustomCookieBanner {...myCustomProps} /> {/* rendered directly without any <div> wrapper */}
+</CookieBanner>
+```
+
+## Cookies manipulation
 react-cookie-banner uses **`universal-cookie`** to manipulate cookies.
 
 You can import the `Cookies` class and use it as follows:
 
 ```js
-import { Cookies } from 'react-cookie-banner';
+import { Cookies } from 'react-cookie-banner'
 
-const cookies = new Cookies(/* Your cookie header, on browser defaults to document.cookie */);
+const cookies = new Cookies(/* Your cookie header, on browsers defaults to document.cookie */)
 
 // simple set
 cookie.set('test', 'a')
@@ -95,21 +139,21 @@ cookie.set('test', 'a', {
   secure: true
 })
 // get
-cookies.get("test")
+cookies.get('test')
 // destroy
-cookies.remove("test", "", -1)
+cookies.remove('test', '', -1)
 ```
 
 Please refer to [universal-cookie](https://github.com/reactivestack/cookies/tree/master/packages/universal-cookie#api---cookies-class) repo for more documentation.
 
-### Server side rendering (universal)
+## Server side rendering (aka Universal)
 react-cookie-banner supports SSR thanks to `react-cookie`.
-If you want to support SSR, you should use the `CookieProvider` from `react-cookie` and the  `CookieBannerUniversal` wrapper:
+If you want to support SSR, you should use the `CookieProvider` from `react-cookie` and the `CookieBannerUniversal` wrapper:
 
-```js
-import { Cookies, CookiesProvider, CookieBannerUniversal } from 'react-cookie-banner';
+```jsx
+import { Cookies, CookiesProvider, CookieBannerUniversal } from 'react-cookie-banner'
 
-const cookies = new Cookies(/* Your cookie header, on browser defaults to document.cookie */);
+const cookies = new Cookies(/* Your cookie header, on browsers defaults to document.cookie */)
 
 <CookiesProvider cookies={cookies}>
   <CookieBannerUniversal />
