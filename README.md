@@ -2,7 +2,7 @@
 
 # React Cookie Banner
 
-A cookie banner for React that can be dismissed with a simple scroll. Because fuck the Cookie Law that's why.
+A cookie banner for React that can be dismissed with a simple scroll. Because [fuck the Cookie Law](http://nocookielaw.com/) that's why.
 
 (If you *really* want to annoy your users you can disable this feature but this is strongly discouraged!).
 
@@ -37,7 +37,7 @@ yarn add react-cookie-banner
 You can see `CookieBanner`'s props in its own [README.md](https://github.com/buildo/react-cookie-banner/blob/master/src/README.md)
 
 ## Style
-react-cookie-banner comes with a nice default style made using inline-style.
+`react-cookie-banner` comes with a nice default style made using inline-style.
 
 Of course, you can customize it as you like in several ways.
 
@@ -86,7 +86,7 @@ You can style every part of it using the appropriate `className`:
 ```sass
 .your-class-name.react-cookie-banner {
   background-color: rgba(60, 60, 60, 0.8);
-  
+
   .cookie-message {
     font-weight: 400;
   }
@@ -120,7 +120,7 @@ You can use your own custom cookie banner component by passing it as `children` 
 ```
 
 ## Cookies manipulation
-react-cookie-banner uses **`universal-cookie`** to manipulate cookies.
+`react-cookie-banner` uses **`universal-cookie`** to manipulate cookies.
 
 You can import the `Cookies` class and use it as follows:
 
@@ -147,7 +147,7 @@ cookies.remove('test', '', -1)
 Please refer to [universal-cookie](https://github.com/reactivestack/cookies/tree/master/packages/universal-cookie#api---cookies-class) repo for more documentation.
 
 ## Server side rendering (aka Universal)
-react-cookie-banner supports SSR thanks to `react-cookie`.
+`react-cookie-banner` supports SSR thanks to `react-cookie`.
 If you want to support SSR, you should use the `CookieProvider` from `react-cookie` and the `CookieBannerUniversal` wrapper:
 
 ```jsx
