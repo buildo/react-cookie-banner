@@ -2,6 +2,13 @@
 
 
 
+## [v3.0.0](https://github.com/buildo/react-cookie-banner/tree/v3.0.0) (2017-12-12)
+[Full Changelog](https://github.com/buildo/react-cookie-banner/compare/v2.0.0...v3.0.0)
+
+#### New features:
+
+- Accessibility improvements: Button elements & a rel attributes [#43](https://github.com/buildo/react-cookie-banner/pull/43)
+
 ## [v2.0.0](https://github.com/buildo/react-cookie-banner/tree/v2.0.0) (2017-12-12)
 [Full Changelog](https://github.com/buildo/react-cookie-banner/compare/v1.0.1...v2.0.0)
 
