@@ -13,7 +13,8 @@ export type Props = {
   link?: {
     msg?: string,
     url: string,
-    target?: '_blank' | '_self' | '_parent' | '_top' | 'framename'
+    target?: '_blank' | '_self' | '_parent' | '_top' | 'framename',
+    rel?: string
   },
   /** message written inside the button of the default cookie banner */
   buttonMessage?: string,
@@ -58,20 +59,22 @@ export default class BannerContent extends React.Component<Props> {
   }
 
   templateCloseIcon = (className: string, onClick: () => void, style: React.CSSProperties ) => (
-    <i {...{ className, onClick, style }} />
+    <button {...{ onClick, style }}>
+      <i {...{ className }} />
+    </button>
   )
 
   templateCloseButton = (buttonMessage: string, onClick: () => void, style: React.CSSProperties) => (
-    <div className='button-close' {...{ onClick, style }}>
+    <button className='button-close' {...{ onClick, style }}>
       {buttonMessage}
-    </div>
+    </button>
   )
 
   templateLink = (style: React.CSSProperties, link?: Props['link']) => {
     if (link) {
-      const { url: href, target, msg } = link;
+      const { url: href, target, rel, msg } = link;
       return (
-        <a className='cookie-link' {...{ href, target, style }}>
+        <a className='cookie-link' {...{ href, target, style, rel }}>
           {msg || 'Learn more'}
         </a>
       );
