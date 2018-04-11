@@ -1,7 +1,7 @@
 ### Examples
 
 ```js
-initialState = { dismissOnScroll: true }
+initialState = { dismissOnScroll: true, dismissOnClick: false }
 
 // reset cookies on first render
 !state.accepted && cookies.get('accepts-cookies') && cookies.remove('accepts-cookies')
@@ -50,6 +50,10 @@ function toggleDismissOnScroll() {
   setState({ dismissOnScroll: !state.dismissOnScroll })
 }
 
+function toggleDismissOnClick() {
+  setState({ dismissOnClick: !state.dismissOnClick })
+}
+
 function resetCookies() {
   cookies.remove('accepts-cookies')
   setState({ accepted: false })
@@ -64,6 +68,10 @@ function resetCookies() {
     {`${state.dismissOnScroll ? 'Disable' : 'Activate'} dismissOnScroll`}
   </button>
 
+  <button onClick={toggleDismissOnClick} style={{ marginLeft: 20 }}>
+    {`${state.dismissOnClick ? 'Disable' : 'Activate'} dismissOnClick`}
+  </button>
+
   <button onClick={resetCookies} style={{ marginLeft: 20 }}>
     Reset Cookies
   </button>
@@ -74,6 +82,7 @@ function resetCookies() {
     link={<a href='http://nocookielaw.com/'>More information on our use of cookies</a>}
     buttonMessage='Close'
     dismissOnScroll={state.dismissOnScroll}
+    dismissOnClick={state.dismissOnClick}
     onAccept={() => setState({ accepted: true })}
   />
 </div>
