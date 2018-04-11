@@ -20,7 +20,7 @@ export type Props = {
   /** object with custom styles used to overwrite default ones */
   styles?: object,
   className?: string,
-  /** pass `true` if you want to dismiss by clicking anywwhere on the banner */
+  /** pass `true` if you want to dismiss by clicking anywhere on the banner */
   dismissOnClick?: boolean
 }
 
