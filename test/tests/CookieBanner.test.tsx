@@ -5,6 +5,7 @@ import * as React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import CookieBanner from '../../src';
+import { getStyle } from '../../src/styleUtils';
 
 function resetCookies() {
   const cookies = document.cookie.split(';');
@@ -45,6 +46,23 @@ describe('CookieBanner', () => {
     expect(component).toMatchSnapshot();
   });
 
+  it('should be displayed with correct default styles', () => {
+    const component = mount(
+      <CookieBanner message='cookie message' link={<a />} onAccept={() => {}} />
+    );
+
+    expect(component.find('.cookie-message').prop('style')).toEqual(getStyle('message'));
+    expect(component.find('.button-close').prop('style')).toEqual(getStyle('button'));
+    expect(component.find('a').prop('style')).toEqual(getStyle('link'));
+
+    const componentWithIcon = mount(
+      <CookieBanner closeIcon='icon' onAccept={() => {}} />
+    );
+
+    expect(componentWithIcon.find('.icon').length).toBe(1);
+    expect(componentWithIcon.find('button').prop('style')).toEqual(getStyle('icon'));
+  });
+
   it('should hide on click', () => {
     const component = mount(
       <CookieBanner message='cookie message' onAccept={() => {}} />
@@ -71,6 +89,35 @@ describe('CookieBanner', () => {
     );
 
     expect(component.find('.cookie-message').text()).toBe('cookie message');
+  });
+
+  it('should be displayed with correct link element', () => {
+    const children = 'children!'
+    const component = mount(
+      <CookieBanner link={<a className='cookie-link'>{children}</a>} onAccept={() => {}} />
+    );
+
+    const cookieBanner = component.find('.cookie-link');
+    expect(cookieBanner.text()).toBe(children);
+  });
+
+  it('should not overwrite link\'s style props, if present', () => {
+    const style = { color: 'red' }
+    const component = mount(
+      <CookieBanner link={<a style={style} className='cookie-link' />} onAccept={() => {}} />
+    );
+
+    const cookieBanner = component.find('.cookie-link');
+    expect(cookieBanner.prop('style')).toEqual(style);
+  });
+
+  it('should be displayed with correct link element', () => {
+    const children = 'children!'
+    const component = mount(
+      <CookieBanner link={<a className='cookie-link'>{children}</a>} onAccept={() => {}} />
+    );
+
+    expect(component.find('.cookie-link').text()).toBe(children);
   });
 
   it('should be replaced with custom child component', () => {
