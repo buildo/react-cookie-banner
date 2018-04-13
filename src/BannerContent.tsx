@@ -9,13 +9,8 @@ export type Props = {
   message?: string,
   /** called when user accepts cookies */
   onAccept: () => void,
-  /** object with infos used to render a link to your cookie-policy page */
-  link?: {
-    msg?: string,
-    url: string,
-    target?: '_blank' | '_self' | '_parent' | '_top' | 'framename',
-    rel?: string
-  },
+  /** JSX element to link to your cookie-policy page */
+  link?: JSX.Element,
   /** message written inside the button of the default cookie banner */
   buttonMessage?: string,
   /** className passed to close-icon */
@@ -30,11 +25,7 @@ export type Props = {
 export const propTypes = {
   message: PropTypes.string,
   onAccept: PropTypes.func.isRequired,
-  link: PropTypes.shape({
-    msg: PropTypes.string,
-    url: PropTypes.string.isRequired,
-    target: PropTypes.oneOf(['_blank', '_self', '_parent', '_top', 'framename'])
-  }),
+  link: PropTypes.element,
   buttonMessage: PropTypes.string,
   closeIcon: PropTypes.string,
   disableStyle: PropTypes.bool,
@@ -70,21 +61,18 @@ export default class BannerContent extends React.Component<Props> {
     </button>
   )
 
-  templateLink = (style: React.CSSProperties, link?: Props['link']) => {
-    if (link) {
-      const { url: href, target, rel, msg } = link;
-      return (
-        <a className='cookie-link' {...{ href, target, style, rel }}>
-          {msg || 'Learn more'}
-        </a>
-      );
-    }
-  }
+  templateLink = (link: JSX.Element, style: React.CSSProperties) => (
+    React.cloneElement(link, link.props.style ? undefined : { style })
+  )
 
   render() {
     const {
       getStyle,
-      props: { onAccept, className, message, link, closeIcon, buttonMessage = 'Got it', ..._wrapperProps }
+      props: {
+        onAccept, className, message,
+        closeIcon, link, buttonMessage = 'Got it',
+        ..._wrapperProps
+      }
     } = this;
 
     const cookieMessageStyle = getStyle('message');
@@ -98,7 +86,7 @@ export default class BannerContent extends React.Component<Props> {
       <div {...wrapperProps}>
         <span className='cookie-message' style={cookieMessageStyle}>
           {message}
-          {this.templateLink(getStyle('link'), link)}
+          {link && this.templateLink(link, getStyle('link'))}
         </span>
         {!closeIcon && this.templateCloseButton(buttonMessage, onAccept, getStyle('button'))}
         {!!closeIcon && this.templateCloseIcon(closeIcon, onAccept, getStyle('icon'))}
