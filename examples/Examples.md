@@ -71,10 +71,7 @@ function resetCookies() {
   <CookieBanner
     styles={styles}
     message={message}
-    link={{
-      msg: 'More information on our use of cookies',
-      url: 'http://nocookielaw.com/'
-    }}
+    link={<a href='http://nocookielaw.com/'>More information on our use of cookies</a>}
     buttonMessage='Close'
     dismissOnScroll={state.dismissOnScroll}
     onAccept={() => setState({ accepted: true })}
