@@ -115,7 +115,9 @@ You can use your own custom cookie banner component by passing it as `children` 
 
 ```jsx
 <CookieBanner>
-  <MyCustomCookieBanner {...myCustomProps} /> {/* rendered directly without any <div> wrapper */}
+  {(onAccept) => (
+    <MyCustomCookieBanner {...myCustomProps} onAccept={onAccept} /> {/* rendered directly without any <div> wrapper */}
+  )}
 </CookieBanner>
 ```
 
