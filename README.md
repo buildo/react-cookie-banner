@@ -110,7 +110,7 @@ You may disable the default style by simply setting the prop `disableStyle` to `
 Now you can re-style the cookie banner completely using your own CSS.
 
 #### 2) Use your own cookie banner!
-Don't lke the layout either?
+Don't like the layout either?
 You can use your own custom cookie banner component by passing it as `children` and still let `react-cookie-banner` handle the hassle of managing `cookies` for you :)
 
 ```jsx
