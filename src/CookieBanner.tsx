@@ -180,7 +180,7 @@ export default class CookieBanner extends React.Component<CookieBanner.Props, St
       onAccept,
       props: {
         message, link, buttonMessage, closeIcon,
-        disableStyle, styles, className, children, ...props
+        disableStyle, styles, className, children, dismissOnClick, ...props
       }
     } = this;
 
@@ -188,7 +188,7 @@ export default class CookieBanner extends React.Component<CookieBanner.Props, St
     const bannerContentProps = {
       ...omit(props, Object.keys(CookieBanner.propTypes)),
       message, onAccept, link, buttonMessage,
-      closeIcon, disableStyle, styles, className
+      closeIcon, disableStyle, styles, className, dismissOnClick,
     };
 
     if (hasAcceptedCookies) {

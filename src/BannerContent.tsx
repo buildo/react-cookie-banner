@@ -19,7 +19,9 @@ export type Props = {
   disableStyle?: boolean,
   /** object with custom styles used to overwrite default ones */
   styles?: object,
-  className?: string
+  className?: string,
+  /** pass `true` if you want to dismiss by clicking anywhere on the banner */
+  dismissOnClick?: boolean
 }
 
 export const propTypes = {
@@ -30,7 +32,8 @@ export const propTypes = {
   closeIcon: PropTypes.string,
   disableStyle: PropTypes.bool,
   styles: PropTypes.object,
-  className: PropTypes.string
+  className: PropTypes.string,
+  dismissOnClick: PropTypes.bool
 };
 
 
@@ -83,7 +86,7 @@ export default class BannerContent extends React.Component<Props> {
     };
 
     return (
-      <div {...wrapperProps}>
+      <div {...wrapperProps} onClick={this.bannerClicked}>
         <span className='cookie-message' style={cookieMessageStyle}>
           {message}
           {link && this.templateLink(link, getStyle('link'))}
@@ -92,6 +95,12 @@ export default class BannerContent extends React.Component<Props> {
         {!!closeIcon && this.templateCloseIcon(closeIcon, onAccept, getStyle('icon'))}
       </div>
     );
+  }
+
+  bannerClicked = () => {
+    if (this.props.dismissOnClick) {
+      this.props.onAccept();
+    }
   }
 
 }
