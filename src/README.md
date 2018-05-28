@@ -8,7 +8,7 @@ React Cookie banner dismissable with just a scroll!
 | **children** | <code>union(ReactChildren &#124; Function)</code> |  | *optional*. Custom component rendered if user has not accepted cookies |
 | **message** | <code>String</code> |  | *optional*. Message written inside default cookie banner |
 | **onAccept** | <code>Function</code> | <code>"onAccept"</code> | *optional*. Called when user accepts cookies |
-| **link** | ```<a href="http://demo.url" target="_blank">Link text</a>``` |  | *optional*. JSX element to link to your cookie-policy page |
+| **link** | ```<CustomLink to"/data-protection">Link text</CustomLink>``` |  | *optional*. JSX element to link to your cookie-policy page |
 | **buttonMessage** | <code>String</code> | <code>"Got it"</code> | *optional*. Message written inside the button of the default cookie banner |
 | **cookie** | <code>String</code> | <code>"accepts-cookies"</code> | *optional*. Cookie-key used to save user's decision about you cookie-policy |
 | **cookieExpiration** | <code>union(Integer &#124; {years: ?Number, days: ?Number, hours: ?Number})</code> | <code>{   "years": 1 }</code> | *optional*. Used to set the cookie expiration |
