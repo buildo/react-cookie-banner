@@ -90,6 +90,7 @@
       "js",
       "ts",
       "tsx"
-    ]
+    ],
+    "testURL": "http://localhost/"
   }
 }
