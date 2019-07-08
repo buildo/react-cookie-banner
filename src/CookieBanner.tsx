@@ -21,6 +21,8 @@ export type CookieBannerRequiredProps = {
   },
   /** used to set the cookie path */
   cookiePath?: string,
+  /** used to set the cookie domain */
+  cookieDomain?: string,
   /** whether the cookie banner should be dismissed on scroll or not */
   dismissOnScroll?: boolean,
   /** amount of pixel the user need to scroll to dismiss the cookie banner */
@@ -73,6 +75,7 @@ export default class CookieBanner extends React.Component<CookieBanner.Props, St
       })
     ]),
     cookiePath: PropTypes.string,
+    cookieDomain: PropTypes.string,
     dismissOnScroll: PropTypes.bool,
     dismissOnScrollThreshold: PropTypes.number
   }
@@ -147,10 +150,11 @@ export default class CookieBanner extends React.Component<CookieBanner.Props, St
   }
 
   onAccept = () => {
-    const { cookies, cookie, cookieExpiration, cookiePath: path, onAccept } = this.props as CookieBannerDefaultedProps;
+    const { cookies, cookie, cookieExpiration, cookiePath: path, cookieDomain: domain, onAccept } = this.props as CookieBannerDefaultedProps;
 
     cookies.set(cookie, true, {
       path,
+      domain,
       expires: new Date(Date.now() + (this.getSecondsSinceExpiration(cookieExpiration) * 1000))
     });
 

@@ -13,6 +13,7 @@ React Cookie banner dismissable with just a scroll!
 | **cookie** | <code>String</code> | <code>"accepts-cookies"</code> | *optional*. Cookie-key used to save user's decision about you cookie-policy |
 | **cookieExpiration** | <code>union(Integer &#124; {years: ?Number, days: ?Number, hours: ?Number})</code> | <code>{   "years": 1 }</code> | *optional*. Used to set the cookie expiration |
 | **cookiePath** | <code>String</code> |  | *optional*. Used to set the cookie path |
+| **cookieDomain** | <code>String</code> |  | *optional*. Used to set the cookie domain |
 | **dismissOnScroll** | <code>Boolean</code> | <code>true</code> | *optional*. Whether the cookie banner should be dismissed on scroll or not |
 | **dismissOnScrollThreshold** | <code>Number</code> | <code>0</code> | *optional*.   amount of pixel the user need to scroll to dismiss the cookie banner |
 | **closeIcon** | <code>String</code> |  | *optional*. ClassName passed to close-icon |
