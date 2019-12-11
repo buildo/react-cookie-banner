@@ -200,9 +200,11 @@ export default class CookieBanner extends React.Component<CookieBanner.Props, St
       <BannerContent {...bannerContentProps} />;
   }
 
-  componentWillReceiveProps(nextProps: CookieBanner.Props) {
-    if (nextProps.dismissOnScroll) {
-      this.addOnScrollListener(nextProps);
+  componentDidUpdate() {
+    const { props } = this;
+
+    if (props.dismissOnScroll) {
+      this.addOnScrollListener(props);
     } else {
       this.removeOnScrollListener();
     }
