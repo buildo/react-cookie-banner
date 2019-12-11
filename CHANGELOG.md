@@ -2,6 +2,16 @@
 
 
 
+## [v4.1.0](https://github.com/buildo/react-cookie-banner/tree/v4.1.0) (2019-12-11)
+[Full Changelog](https://github.com/buildo/react-cookie-banner/compare/v4.0.0...v4.1.0)
+
+#### New features:
+
+- Leverage componentDidUpdate hook instead of componentWillReceiveProps [#67](https://github.com/buildo/react-cookie-banner/pull/67)
+- Fixing build after migration to Concourse [#64](https://github.com/buildo/react-cookie-banner/pull/64)
+- Migrating from drone to concourse [#63](https://github.com/buildo/react-cookie-banner/pull/63)
+- Updated link prop documentation [#57](https://github.com/buildo/react-cookie-banner/pull/57)
+
 ## [v4.0.0](https://github.com/buildo/react-cookie-banner/tree/v4.0.0) (2018-05-04)
 [Full Changelog](https://github.com/buildo/react-cookie-banner/compare/v3.0.0...v4.0.0)
 
